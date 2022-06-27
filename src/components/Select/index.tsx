@@ -9,15 +9,16 @@ import {
   useFocusRing,
   useOverlay,
   FocusScope,
-  DismissButton
+  DismissButton,
+  useListBoxSection
 } from 'react-aria'
-import { useSelectState, Item, SelectState } from 'react-stately'
+import { useSelectState, Item, Section as StatelySection, SelectState } from 'react-stately'
 import { AriaSelectProps } from '@react-types/select'
 import { Node } from '@react-types/shared'
 import { ItemValueProps } from '../../types'
 
 export interface SelectRootProps extends Omit<AriaSelectProps<ItemValueProps>, 'children'> {
-  children: ReactNode
+  children?: ReactNode
   label?: string
   name?: string
 }
@@ -35,6 +36,12 @@ export interface SelectOptionProps extends Omit<HTMLAttributes<HTMLLIElement>, '
     | ReactNode
     | ((props: { isDisabled: boolean; isSelected: boolean; isFocused: boolean; option: ItemValueProps }) => ReactNode)
 }
+export interface SelectSectionProps extends Omit<HTMLAttributes<HTMLLIElement>, 'children'> {
+  section: Node<ItemValueProps>
+  children: ReactNode | ((props: { section: Node<ItemValueProps> }) => ReactNode)
+}
+export interface SelectSectionOptionsProps extends HTMLAttributes<HTMLUListElement> {}
+export interface SelectSectionHeadingProps extends HTMLAttributes<HTMLSpanElement> {}
 export interface SelectPopoverTriggerProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'placeholder' | 'children' | 'className'> {
   placeholder?: ReactNode
@@ -55,7 +62,7 @@ const createSelectContext = () => {
     const context = useContext(SelectContext)
     if (!context) {
       throw new Error(
-        'You cannot use `Select.Label`, `Select.Popover`, `Select.PopoverTrigger`, `Select.Options` or `Select.Option` outside of `Select` component.'
+        'You cannot use `Select.Label`, `Select.Popover`, `Select.PopoverTrigger`, `Select.Section`, `Select.Options` or `Select.Option` outside of `Select` component.'
       )
     }
     return context
@@ -63,13 +70,40 @@ const createSelectContext = () => {
   return [useSelectContext, SelectContext.Provider] as const
 }
 
+const createSelectSectionContext = () => {
+  const SelectSectionContext = React.createContext<
+    |(ReturnType<typeof useListBoxSection> & {
+        section: Node<ItemValueProps>
+      })
+      | undefined
+      >(undefined)
+
+  const useSelectSectionContext = () => {
+    const context = useContext(SelectSectionContext)
+    if (!context) {
+      throw new Error(
+        'You cannot use `Select.SectionHeading` or `Select.SectionOptions` outside of `Select.Section` component.'
+      )
+    }
+    return context
+  }
+  return [useSelectSectionContext, SelectSectionContext.Provider] as const
+}
+
 const [useSelectContext, SelectProvider] = createSelectContext()
+const [useSelectSectionContext, SelectSectionProvider] = createSelectSectionContext()
 
 const SelectRoot = (props: SelectRootProps) => {
   const ariaProps = {
     ...props,
     label: 'x',
-    children: (item: ItemValueProps) => <Item>{item.name}</Item>
+    children: (item: ItemValueProps) =>
+      item.items ? (
+      // eslint-disable-next-line react/no-children-prop
+      <StatelySection key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
+      ) : (
+      <Item key={item.key}>{item.name}</Item>
+      )
   }
   const state = useSelectState(ariaProps)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
@@ -156,6 +190,38 @@ const Option = (props: SelectOptionProps) => {
     </li>
   )
 }
+
+const Section = (props: SelectSectionProps) => {
+  const { section, children } = props
+  const { itemProps, groupProps, headingProps } = useListBoxSection({
+    heading: section.rendered,
+    'aria-label': section['aria-label']
+  })
+
+  return (
+    <SelectSectionProvider
+      value={{
+        itemProps,
+        groupProps,
+        headingProps,
+        section
+      }}
+    >
+      <li {...mergeProps(itemProps, props)}>{typeof children === 'function' ? children?.({ section }) : children}</li>
+    </SelectSectionProvider>
+  )
+}
+
+const SectionHeading = (props: SelectSectionHeadingProps) => {
+  const { headingProps } = useSelectSectionContext()
+  return <span {...mergeProps(headingProps, props)}>{props.children}</span>
+}
+
+const SectionOptions = (props: SelectSectionOptionsProps) => {
+  const { groupProps } = useSelectSectionContext()
+  return <ul {...mergeProps(groupProps, props)}>{props.children}</ul>
+}
+
 const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
   const { triggerProps, valueProps, triggerRef, state } = useSelectContext()
   const { focusProps, isFocusVisible } = useFocusRing()
@@ -173,4 +239,4 @@ const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
   )
 }
 
-export const Select = Object.assign(SelectRoot, { Label, PopoverTrigger, Popover, Options, Option })
+export const Select = Object.assign(SelectRoot, { Label, PopoverTrigger, Popover, Options, Option, Section, SectionHeading, SectionOptions })

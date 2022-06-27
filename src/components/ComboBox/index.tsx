@@ -18,7 +18,7 @@ import { Node } from '@react-types/shared'
 import { ItemValueProps } from '../../types'
 
 export interface ComboBoxRootProps extends Omit<AriaComboBoxProps<ItemValueProps>, 'children'> {
-  children: ReactNode
+  children?: ReactNode
 }
 export interface ComboBoxLabelProps extends HTMLAttributes<HTMLLabelElement> {}
 export interface ComboBoxPopoverProps extends HTMLAttributes<HTMLDivElement> {}

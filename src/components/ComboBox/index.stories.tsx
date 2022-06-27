@@ -1,7 +1,8 @@
 import classcat from 'classcat'
 import React from 'react'
-import { FaCheck, FaChevronDown } from 'react-icons/fa'
-import { ComboBox } from './index'
+import { FaCheck, FaChevronDown, FaSearch } from 'react-icons/fa'
+import { useAsyncList } from 'react-stately'
+import { ComboBox, ComboBoxRootProps } from './index'
 
 export default {
   title: 'Example/ComboBox',
@@ -95,11 +96,10 @@ const items = [
   }
 ]
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = () => {
+const AutoComplete = (props: ComboBoxRootProps) => {
   return (
-    <ComboBox defaultItems={items}>
-      <ComboBox.Label className="block text-sm font-medium mb-1 text-gray-700">Assigned to</ComboBox.Label>
+    <ComboBox {...props}>
+      <ComboBox.Label className="block text-sm font-medium mb-1 text-gray-700">{props.label}</ComboBox.Label>
       <ComboBox.InputGroup
         className={({ isFocused }) => `
         ${isFocused ? 'ring-indigo-500 border-indigo-500 ring-1' : 'border-gray-300'}
@@ -108,10 +108,13 @@ const Template = () => {
       >
         {({ selectedItem }) => (
           <>
-            {selectedItem && (
+            <span>
+              <FaSearch className="ml-2 h-5 w-5 text-gray-300" aria-hidden="true" />
+            </span>
+            {selectedItem && selectedItem.value.avatar && (
               <img src={selectedItem.value.avatar} alt="" className="ml-3 flex-shrink-0 h-6 w-6 rounded-full" />
             )}
-            <ComboBox.Input placeholder="Select" className="relative w-full pl-3 pr-10 py-2 rounded-md outline-none" />
+            <ComboBox.Input placeholder="Search..." className="relative w-full pl-3 pr-10 py-2 rounded-md outline-none" />
             <ComboBox.PopoverTrigger className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2">
               <FaChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
             </ComboBox.PopoverTrigger>
@@ -123,7 +126,7 @@ const Template = () => {
           {({ options }) =>
             options.map((option) =>
               option.type === 'section' ? (
-                <ComboBox.Section section={option}>
+                <ComboBox.Section key={option.key} section={option}>
                   {({ section }) => (
                     <>
                       {section.rendered && <ComboBox.SectionHeading className='text-xs font-bold uppercase text-gray-500 mx-3'>{section.rendered}</ComboBox.SectionHeading>}
@@ -188,7 +191,7 @@ const Template = () => {
                   {({ isSelected, isFocused }) => (
                     <>
                       <div className="flex items-center">
-                        <img src={option.value.avatar} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
+                        {option.value.avatar && <img src={option.value.avatar} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />}
                         <span className={`${isSelected ? 'font-semibold' : 'font-normal'} ml-3 block truncate`}>
                           {option.value.name}
                         </span>
@@ -214,4 +217,36 @@ const Template = () => {
   )
 }
 
-export const Tailwind = Template.bind({})
+interface StarWarsCharacter {
+  name: string;
+}
+
+export const Tailwind = () => <AutoComplete defaultItems={items} label="Assigned to" />
+export const AsyncLoading = () => {
+  const list = useAsyncList<StarWarsCharacter>({
+    async load ({ signal, cursor, filterText }) {
+      if (cursor) {
+        cursor = cursor.replace(/^http:\/\//i, 'https://')
+      }
+
+      // If no cursor is available, then we're loading the first page,
+      // filtering the results returned via a query string that
+      // mirrors the input text.
+      // Otherwise, the cursor is the next URL to load,
+      // as returned from the previous page.
+      const res = await fetch(
+        cursor || `https://swapi.dev/api/people/?search=${filterText}`,
+        { signal }
+      )
+      const json = await res.json()
+
+      return {
+        items: json.results,
+        cursor: json.next
+      }
+    }
+  })
+  return (
+    <AutoComplete items={list.items.map(item => ({ ...item, key: item.name }))} inputValue={list.filterText} onInputChange={list.setFilterText} label="Star Wars Character Search" />
+  )
+}
