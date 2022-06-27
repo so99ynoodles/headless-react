@@ -1,15 +1,15 @@
-# react-headless
+# headless-react
 
 Headless React components with [`@react-aia`](https://react-spectrum.adobe.com/react-aria/index.html) and [`@react-stately`](https://react-spectrum.adobe.com/react-stately/index.html).
 
 ## Getting Started
 
 ```
-$ npm install @react-headless/combobox
+$ npm install @headless-react/combobox
 ```
 
 ```jsx
-import { ComboBox } from '@react-headless/combobox'
+import { ComboBox } from '@headless-react/combobox'
 
 const AutoComplete = ({
   label,

@@ -15,7 +15,6 @@ const AutoComplete = ({
   label,
   items
 }) => {
-
   return (
     <ComboBox defaultItems={items}>
       <ComboBox.Label>{label}</ComboBox.Label>
@@ -40,3 +39,7 @@ const AutoComplete = ({
   )
 }
 ```
+
+## Example
+
+[CodeSandBox Example](https://codesandbox.io/s/headless-react-combobox-yseg1j?file=/src/App.tsx)
