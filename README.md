@@ -43,8 +43,8 @@ const AutoComplete = ({
 
 ## Components
 - [x] ComboBox
-- [x] Select
-  - [ ] Single
+- [ ] Select
+  - [x] Single
   - [ ] Multi
 - [ ] RadioGroup
 
