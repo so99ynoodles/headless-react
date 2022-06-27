@@ -13,7 +13,6 @@
     "storybook": "start-storybook -p 6006",
     "build": "lerna run build --stream",
     "build-storybook": "build-storybook",
-    "publish": "lern run publish --stream",
     "tailwind:watch": "npx tailwindcss -i ./.storybook/tailwind.css -o ./.storybook/global.css --watch"
   },
   "keywords": [],
