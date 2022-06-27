@@ -1,7 +1,7 @@
 {
   "name": "@headless-react/select",
   "description": "Headless React components using react-stately and react-aria",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "source": "src/index.ts",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -22,7 +22,11 @@
     "build:watch": "yarn build:npm -w --watch.include './src/**'",
     "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
   },
-  "keywords": ["react", "react-aria", "react-stately"],
+  "keywords": [
+    "react",
+    "react-aria",
+    "react-stately"
+  ],
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/react": "18.0.14"
