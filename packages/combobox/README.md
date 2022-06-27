@@ -23,7 +23,7 @@ const AutoComplete = ({
         {({ selectedItem }) => (
           <>
             <ComboBox.Input />
-            <ComboBox.PopoverTrigger>
+            <ComboBox.PopoverTrigger />
           </>
         )}
       </ComboBox.InputGroup>

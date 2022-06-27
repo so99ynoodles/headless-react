@@ -17,7 +17,7 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "build": "rollup -c",
+    "build": "rollup -c --environment BUILD:production",
     "build:npm": "yarn build",
     "build:watch": "yarn build:npm -w --watch.include './src/**'",
     "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
@@ -29,10 +29,11 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/react": "18.0.14"
+    "@types/react": "^18.0.14"
   },
   "peerDependencies": {
-    "react": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tslib": "^2.3.1"
   },
   "dependencies": {

@@ -3,14 +3,12 @@ import { babel } from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
-import { terser } from 'rollup-plugin-terser'
 
-export async function composeConfig (projectPathname, externals = []) {
-  const pkg = (await import(path.resolve(projectPathname, 'package.json')))
-    .default
+export async function composeConfig(projectPathname) {
+  const pkg = (await import(path.resolve(projectPathname, 'package.json'))).default
   const baseConfig = {
     input: 'src/index.ts',
-    external: [...externals],
+    external: ['react', 'react-dom'],
     plugins: [
       resolve(),
       typescript(),
@@ -19,8 +17,7 @@ export async function composeConfig (projectPathname, externals = []) {
       }),
       babel({
         babelHelpers: 'bundled'
-      }),
-      terser()
+      })
     ]
   }
   return [

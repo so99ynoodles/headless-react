@@ -17,7 +17,7 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "build": "rollup -c",
+    "build": "rollup -c --environment BUILD:production",
     "build:npm": "yarn build",
     "build:watch": "yarn build:npm -w --watch.include './src/**'",
     "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
@@ -37,11 +37,14 @@
     "@react-aria/overlays": "^3.9.1",
     "@react-aria/utils": "^3.13.1",
     "@react-stately/collections": "^3.4.1",
-    "@react-stately/combobox": "^3.1.1",
-    "@types/react": "18.0.14"
+    "@react-stately/combobox": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14"
   },
   "peerDependencies": {
-    "react": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tslib": "^2.3.1"
   },
   "publishConfig": {
