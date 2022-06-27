@@ -8,7 +8,7 @@
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/so99ynoodles/react-headless"
+    "url": "https://github.com/so99ynoodles/headless-react"
   },
   "files": [
     "lib",

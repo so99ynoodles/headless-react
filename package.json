@@ -5,7 +5,7 @@
   "private": "true",
   "repository": {
     "type": "git",
-    "url": "https://github.com/so99ynoodles/react-headless"
+    "url": "https://github.com/so99ynoodles/headless-react"
   },
   "workspaces": [
     "packages/*"
