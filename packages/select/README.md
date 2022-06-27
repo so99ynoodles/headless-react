@@ -5,11 +5,11 @@ Headless React Select component with [`@react-aia`](https://react-spectrum.adobe
 ## Getting Started
 
 ```
-$ npm install @react-headless/Select
+$ npm install @headless-react/select
 ```
 
 ```jsx
-import { Select } from '@react-headless/select'
+import { Select } from '@headless-react/select'
 
 const Select = ({
   label,

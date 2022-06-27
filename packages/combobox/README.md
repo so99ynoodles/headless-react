@@ -5,11 +5,11 @@ Headless React ComboBox component with [`@react-aia`](https://react-spectrum.ado
 ## Getting Started
 
 ```
-$ npm install @react-headless/combobox
+$ npm install @headless-react/combobox
 ```
 
 ```jsx
-import { ComboBox } from '@react-headless/combobox'
+import { ComboBox } from '@headless-react/combobox'
 
 const AutoComplete = ({
   label,
