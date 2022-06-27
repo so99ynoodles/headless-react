@@ -1,6 +1,6 @@
-# react-headless
+# @react-headless/combobox
 
-Headless React components with [`@react-aia`](https://react-spectrum.adobe.com/react-aria/index.html) and [`@react-stately`](https://react-spectrum.adobe.com/react-stately/index.html).
+Headless React ComboBox component with [`@react-aia`](https://react-spectrum.adobe.com/react-aria/index.html) and [`@react-stately`](https://react-spectrum.adobe.com/react-stately/index.html).
 
 ## Getting Started
 
@@ -40,12 +40,3 @@ const AutoComplete = ({
   )
 }
 ```
-
-## Components
-- [x] ComboBox
-- [x] Select
-  - [ ] Single
-  - [ ] Multi
-- [ ] RadioGroup
-
-...something we need

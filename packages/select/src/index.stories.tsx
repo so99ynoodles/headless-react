@@ -2,7 +2,7 @@ import React from 'react'
 import classcat from 'classcat'
 import { FaCheck, FaChevronDown } from 'react-icons/fa'
 import { Select } from './index'
-import { ItemValueProps } from '../../types'
+import { ItemValueProps } from './types'
 
 export default {
   title: 'Example/Select',
