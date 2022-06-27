@@ -1,8 +1,6 @@
 import React from 'react'
-import {
-  mergeProps,
-  useListBoxSection
-} from 'react-aria'
+import { useListBoxSection } from '@react-aria/listbox'
+import { mergeProps } from '@react-aria/utils'
 import { SelectSectionProvider, useSelectSectionContext } from './context'
 import { SelectSectionHeadingProps, SelectSectionOptionsProps, SelectSectionProps } from './types'
 

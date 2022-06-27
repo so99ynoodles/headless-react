@@ -1,7 +1,7 @@
 import classcat from 'classcat'
 import React from 'react'
 import { FaCheck, FaChevronDown, FaSearch } from 'react-icons/fa'
-import { useAsyncList } from 'react-stately'
+// import { useAsyncList } from 'react-stately'
 import { ComboBox, ComboBoxProps } from './index'
 
 export default {
@@ -217,36 +217,36 @@ const AutoComplete = (props: ComboBoxProps) => {
   )
 }
 
-interface StarWarsCharacter {
-  name: string;
-}
-
 export const Tailwind = () => <AutoComplete defaultItems={items} label="Assigned to" />
-export const AsyncLoading = () => {
-  const list = useAsyncList<StarWarsCharacter>({
-    async load ({ signal, cursor, filterText }) {
-      if (cursor) {
-        cursor = cursor.replace(/^http:\/\//i, 'https://')
-      }
 
-      // If no cursor is available, then we're loading the first page,
-      // filtering the results returned via a query string that
-      // mirrors the input text.
-      // Otherwise, the cursor is the next URL to load,
-      // as returned from the previous page.
-      const res = await fetch(
-        cursor || `https://swapi.dev/api/people/?search=${filterText}`,
-        { signal }
-      )
-      const json = await res.json()
+// interface StarWarsCharacter {
+//   name: string;
+// }
+// export const AsyncLoading = () => {
+//   const list = useAsyncList<StarWarsCharacter>({
+//     async load ({ signal, cursor, filterText }) {
+//       if (cursor) {
+//         cursor = cursor.replace(/^http:\/\//i, 'https://')
+//       }
 
-      return {
-        items: json.results,
-        cursor: json.next
-      }
-    }
-  })
-  return (
-    <AutoComplete items={list.items.map(item => ({ ...item, key: item.name }))} inputValue={list.filterText} onInputChange={list.setFilterText} label="Star Wars Character Search" />
-  )
-}
+//       // If no cursor is available, then we're loading the first page,
+//       // filtering the results returned via a query string that
+//       // mirrors the input text.
+//       // Otherwise, the cursor is the next URL to load,
+//       // as returned from the previous page.
+//       const res = await fetch(
+//         cursor || `https://swapi.dev/api/people/?search=${filterText}`,
+//         { signal }
+//       )
+//       const json = await res.json()
+
+//       return {
+//         items: json.results,
+//         cursor: json.next
+//       }
+//     }
+//   })
+//   return (
+//     <AutoComplete items={list.items.map(item => ({ ...item, key: item.name }))} inputValue={list.filterText} onInputChange={list.setFilterText} label="Star Wars Character Search" />
+//   )
+// }

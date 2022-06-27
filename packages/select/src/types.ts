@@ -1,9 +1,11 @@
 import { ReactNode, HTMLAttributes } from 'react'
-import { SelectState } from 'react-stately'
+import { SelectState } from '@react-stately/select'
 import { AriaSelectProps } from '@react-types/select'
 import { Node } from '@react-types/shared'
-import { ItemValueProps } from '../../types'
 
+export type ItemValueProps = {
+  [key: string | number]: any
+}
 export interface SelectProps extends Omit<AriaSelectProps<ItemValueProps>, 'children'> {
   children?: ReactNode
   label?: string

@@ -1,5 +1,8 @@
 import React from 'react'
-import { DismissButton, FocusScope, mergeProps, useButton, useFocusRing, useOverlay } from 'react-aria'
+import { useButton } from '@react-aria/button'
+import { FocusScope, useFocusRing } from '@react-aria/focus'
+import { DismissButton, useOverlay } from '@react-aria/overlays'
+import { mergeProps } from '@react-aria/utils'
 import { useComboBoxContext } from './context'
 import { ComboBoxPopoverProps, ComboBoxPopoverTriggerProps } from './types'
 

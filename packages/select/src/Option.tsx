@@ -1,27 +1,29 @@
 import React, { useRef } from 'react'
-import { mergeProps, useListBox, useOption } from 'react-aria'
-import { useComboBoxContext } from './context'
-import { ComboBoxOptionProps, ComboBoxOptionsProps } from './types'
+import { useListBox, useOption } from '@react-aria/listbox'
+import { mergeProps } from '@react-aria/utils'
+import { useSelectContext } from './context'
+import { SelectOptionProps, SelectOptionsProps } from './types'
 
-export const Options = (props: ComboBoxOptionsProps) => {
-  const { listBoxProps: listProps, listBoxRef, state } = useComboBoxContext()
-  const { listBoxProps } = useListBox(listProps, state, listBoxRef)
+export const Options = (props: SelectOptionsProps) => {
+  const { menuProps, state } = useSelectContext()
+  const listRef = useRef<HTMLUListElement | null>(null)
+  const { listBoxProps } = useListBox(menuProps, state, listRef)
 
   if (!state.isOpen) {
     return null
   }
 
   return (
-    <ul ref={listBoxRef} {...mergeProps(listBoxProps, props)}>
+    <ul ref={listRef} {...mergeProps(listBoxProps, props)}>
       {typeof props.children === 'function' ? props.children?.({ options: [...state.collection] }) : props.children}
     </ul>
   )
 }
 
-export const Option = (props: ComboBoxOptionProps) => {
+export const Option = (props: SelectOptionProps) => {
   const { option } = props
-  const { state } = useComboBoxContext()
-  const optionRef = useRef<HTMLLIElement | null>(null)
+  const { state } = useSelectContext()
+  const optionRef = React.useRef<HTMLLIElement | null>(null)
   const { optionProps, isDisabled, isSelected, isFocused } = useOption({ key: option.key }, state, optionRef)
   return (
     <li

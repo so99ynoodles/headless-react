@@ -1,9 +1,11 @@
 import { HTMLAttributes, ReactNode } from 'react'
-import { ComboBoxState } from 'react-stately'
+import { ComboBoxState } from '@react-stately/combobox'
 import { AriaComboBoxProps } from '@react-types/combobox'
 import { Node } from '@react-types/shared'
-import { ItemValueProps } from '../../types'
 
+export type ItemValueProps = {
+  [key: string | number]: any
+}
 export interface ComboBoxProps extends Omit<AriaComboBoxProps<ItemValueProps>, 'children'> {
   children?: ReactNode
 }

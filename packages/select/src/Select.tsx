@@ -1,11 +1,8 @@
 import React, { useRef } from 'react'
-import {
-  useSelect,
-  HiddenSelect
-} from 'react-aria'
-import { useSelectState, Item, Section as StatelySection } from 'react-stately'
-import { ItemValueProps } from '../../types'
-import { SelectProps } from './types'
+import { HiddenSelect, useSelect } from '@react-aria/select'
+import { useSelectState } from '@react-stately/select'
+import { Item, Section } from '@react-stately/collections'
+import { SelectProps, ItemValueProps } from './types'
 import { SelectProvider } from './context'
 
 export const Select = (props: SelectProps) => {
@@ -15,7 +12,7 @@ export const Select = (props: SelectProps) => {
     children: (item: ItemValueProps) =>
       item.items ? (
       // eslint-disable-next-line react/no-children-prop
-      <StatelySection key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
+      <Section key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
       ) : (
       <Item key={item.key}>{item.name}</Item>
       )

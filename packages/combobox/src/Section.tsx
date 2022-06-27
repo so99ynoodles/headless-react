@@ -1,5 +1,6 @@
 import React from 'react'
-import { mergeProps, useListBoxSection } from 'react-aria'
+import { useListBoxSection } from '@react-aria/listbox'
+import { mergeProps } from '@react-aria/utils'
 import { useComboBoxSectionContext, ComboBoxSectionProvider } from './context'
 import { ComboBoxSectionHeadingProps, ComboBoxSectionOptionsProps, ComboBoxSectionProps } from './types'
 

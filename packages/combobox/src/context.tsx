@@ -1,11 +1,9 @@
 import { createContext, MutableRefObject, useContext } from 'react'
-import {
-  useComboBox,
-  useListBoxSection
-} from 'react-aria'
-import { ComboBoxState } from 'react-stately'
+import { useComboBox } from '@react-aria/combobox'
+import { useListBoxSection } from '@react-aria/listbox'
+import { ComboBoxState } from '@react-stately/combobox'
 import { Node } from '@react-types/shared'
-import { ItemValueProps } from '../../types'
+import { ItemValueProps } from './types'
 
 const createComboBoxContext = () => {
   const ComboBoxContext = createContext<

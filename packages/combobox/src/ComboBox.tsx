@@ -1,12 +1,10 @@
 import React, { useRef } from 'react'
-import {
-  useComboBox,
-  useFilter
-} from 'react-aria'
-import { Item, Section as StatelySection, useComboBoxState } from 'react-stately'
-import { ItemValueProps } from '../../types'
+import { Item, Section } from '@react-stately/collections'
+import { useFilter } from '@react-aria/i18n'
+import { useComboBox } from '@react-aria/combobox'
+import { useComboBoxState } from '@react-stately/combobox'
 import { ComboBoxProvider } from './context'
-import { ComboBoxProps } from './types'
+import { ComboBoxProps, ItemValueProps } from './types'
 
 export const ComboBox = (props: ComboBoxProps) => {
   const ariaProps = {
@@ -15,7 +13,7 @@ export const ComboBox = (props: ComboBoxProps) => {
     children: (item: ItemValueProps) =>
       item.items ? (
         // eslint-disable-next-line react/no-children-prop
-        <StatelySection key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
+        <Section key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
       ) : (
         <Item key={item.key}>{item.name}</Item>
       )

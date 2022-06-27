@@ -1,12 +1,8 @@
-import React from 'react'
-import {
-  mergeProps,
-  useButton,
-  useFocusRing,
-  useOverlay,
-  FocusScope,
-  DismissButton
-} from 'react-aria'
+import React, { useRef } from 'react'
+import { useButton } from '@react-aria/button'
+import { FocusScope, useFocusRing } from '@react-aria/focus'
+import { DismissButton, useOverlay } from '@react-aria/overlays'
+import { mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
 import { SelectMenuProps, SelectPopoverTriggerProps } from './types'
 
@@ -29,7 +25,7 @@ export const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
 
 export const Popover = (props: SelectMenuProps) => {
   const { state } = useSelectContext()
-  const overlayRef = React.useRef(null)
+  const overlayRef = useRef(null)
   const { overlayProps } = useOverlay(
     {
       isOpen: state.isOpen,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { mergeProps } from 'react-aria'
+import { mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
 import { SelectLabelProps } from './types'
 

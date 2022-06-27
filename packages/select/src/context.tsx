@@ -1,11 +1,9 @@
 import { createContext, useContext, MutableRefObject } from 'react'
-import {
-  useSelect,
-  useListBoxSection
-} from 'react-aria'
-import { SelectState } from 'react-stately'
 import { Node } from '@react-types/shared'
-import { ItemValueProps } from '../../types'
+import { useSelect } from '@react-aria/select'
+import { useListBoxSection } from '@react-aria/listbox'
+import { SelectState } from '@react-stately/select'
+import { ItemValueProps } from './types'
 
 const createSelectContext = () => {
   const SelectContext = createContext<
