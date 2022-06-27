@@ -1,11 +1,15 @@
 {
   "name": "@react-headless/select",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "source": "src/index.ts",
   "browser": "lib/index.js",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/so99ynoodles/react-headless"
+  },
   "directories": {
     "lib": "lib"
   },
@@ -19,6 +23,7 @@
     "build": "rollup -c",
     "build:npm": "yarn build",
     "build:watch": "yarn build:npm -w --watch.include './src/**'",
+    "prepublishOnly": "yarn build:npm",
     "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
   },
   "keywords": [],
@@ -40,5 +45,9 @@
     "@react-aria/utils": "^3.13.1",
     "@react-stately/collections": "^3.4.1",
     "@react-stately/select": "^3.2.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
