@@ -23,7 +23,6 @@
     "build": "rollup -c",
     "build:npm": "yarn build",
     "build:watch": "yarn build:npm -w --watch.include './src/**'",
-    "prepublishOnly": "yarn build:npm",
     "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
   },
   "keywords": [],
