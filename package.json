@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "description": "",
+  "description": "Headless React components using react-stately and react-aria",
   "main": "index.js",
   "private": "true",
   "repository": {

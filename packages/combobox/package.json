@@ -1,7 +1,7 @@
 {
-  "name": "@react-headless/combobox",
-  "description": "React headless components",
-  "version": "0.0.1",
+  "name": "@headless-react/combobox",
+  "description": "Headless React components using react-stately and react-aria",
+  "version": "0.0.0",
   "source": "src/index.ts",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -41,6 +41,7 @@
     "tslib": "^2.3.1"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
