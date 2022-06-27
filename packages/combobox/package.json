@@ -1,5 +1,6 @@
 {
   "name": "@react-headless/combobox",
+  "description": "React headless components",
   "version": "0.0.1",
   "source": "src/index.ts",
   "main": "lib/index.cjs.js",
@@ -8,9 +9,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/so99ynoodles/react-headless"
-  },
-  "directories": {
-    "lib": "lib"
   },
   "files": [
     "lib",
@@ -24,8 +22,7 @@
     "build:watch": "yarn build:npm -w --watch.include './src/**'",
     "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["react", "react-aria", "react-stately"],
   "license": "Apache-2.0",
   "dependencies": {
     "@react-aria/button": "^3.5.1",
@@ -44,7 +41,6 @@
     "tslib": "^2.3.1"
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   }
 }
