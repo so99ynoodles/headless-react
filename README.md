@@ -55,5 +55,5 @@ const AutoComplete = ({
 
 ## Examples on CodeSandBox
 
-[Select Example](https://codesandbox.io/s/headless-react-select-rte4ze?file=/src/App.tsx)
-[ComboBox Example](https://codesandbox.io/s/headless-react-combobox-yseg1j?file=/src/App.tsx)
+- [Select Example](https://codesandbox.io/s/headless-react-select-rte4ze?file=/src/App.tsx)
+- [ComboBox Example](https://codesandbox.io/s/headless-react-combobox-yseg1j?file=/src/App.tsx)

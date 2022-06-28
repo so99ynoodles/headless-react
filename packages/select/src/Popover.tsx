@@ -4,7 +4,14 @@ import { FocusScope, useFocusRing } from '@react-aria/focus'
 import { DismissButton, useOverlay } from '@react-aria/overlays'
 import { mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
-import { ItemValueProps, SelectMenuProps, SelectPopoverTriggerProps } from './types'
+import {
+  ItemValueProps,
+  MultiSelectPopoverItemClearButtonProps,
+  MultiSelectPopoverItemProps,
+  SelectMenuProps,
+  SelectPopoverClearButtonProps,
+  SelectPopoverTriggerProps
+} from './types'
 import { MultiSelectState } from './hooks/useMultiSelectState'
 import { SelectState } from '@react-stately/select'
 
@@ -32,6 +39,25 @@ export const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
   )
 }
 
+export const PopoverClearButton = (props: SelectPopoverClearButtonProps) => {
+  const { state } = useSelectContext()
+  const buttonRef = useRef<HTMLSpanElement | null>(null)
+  const { buttonProps } = useButton(
+    {
+      ...props,
+      onPress: (e) => {
+        if (props.onPress) {
+          props.onPress(e)
+        } else {
+          (state as SelectState<ItemValueProps>).selectionManager.setSelectedKeys(new Set())
+        }
+      }
+    },
+    buttonRef
+  )
+  return <span {...mergeProps(buttonProps, props)}>{props.children}</span>
+}
+
 export const Popover = (props: SelectMenuProps) => {
   const { state } = useSelectContext()
   const overlayRef = useRef(null)
@@ -57,4 +83,27 @@ export const Popover = (props: SelectMenuProps) => {
       </div>
     </FocusScope>
   )
+}
+
+export const PopoverItem = (props: MultiSelectPopoverItemProps) => {
+  return <span {...props}>{props.children}</span>
+}
+
+export const PopoverItemClearButton = (props: MultiSelectPopoverItemClearButtonProps) => {
+  const { state } = useSelectContext()
+  const buttonRef = useRef<HTMLSpanElement | null>(null)
+  const { buttonProps } = useButton(
+    {
+      ...props,
+      onPress: (e) => {
+        if (props.onPress) {
+          props.onPress(e)
+        } else {
+          (state as MultiSelectState<ItemValueProps>).selectionManager.toggleSelection(props.item.key)
+        }
+      }
+    },
+    buttonRef
+  )
+  return <span {...mergeProps(buttonProps, props)}>{props.children}</span>
 }

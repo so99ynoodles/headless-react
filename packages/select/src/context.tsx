@@ -47,12 +47,30 @@ const createSelectSectionContext = () => {
   return [useSelectSectionContext, SelectSectionContext.Provider] as const
 }
 
+const createMultiSelectPopoverContext = () => {
+  const MultiSelectPopoverContext = createContext<Node<ItemValueProps> | undefined>(undefined)
+
+  const useMultiSelectPopoverContext = () => {
+    const context = useContext(MultiSelectPopoverContext)
+    if (!context) {
+      throw new Error(
+        'You cannot use `MultiSelect.PopoverItem` or `MultiSelect.PopoverItemClearButton` outside of `MultiSelect.Popover` component.'
+      )
+    }
+    return context
+  }
+  return [useMultiSelectPopoverContext, MultiSelectPopoverContext.Provider] as const
+}
+
 const [useSelectContext, SelectProvider] = createSelectContext()
 const [useSelectSectionContext, SelectSectionProvider] = createSelectSectionContext()
+const [useMultiSelectPopoverContext, MultiSelectPopoverProvider] = createMultiSelectPopoverContext()
 
 export {
   useSelectContext,
   SelectProvider,
   useSelectSectionContext,
-  SelectSectionProvider
+  SelectSectionProvider,
+  useMultiSelectPopoverContext,
+  MultiSelectPopoverProvider
 }

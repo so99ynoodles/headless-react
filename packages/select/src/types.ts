@@ -1,5 +1,6 @@
 import { ReactNode, HTMLAttributes, Key } from 'react'
 import { AriaSelectProps } from '@react-types/select'
+import { AriaButtonProps } from '@react-types/button'
 import { Node } from '@react-types/shared'
 import { AriaMultiSelectProps } from './hooks/useMultiSelect'
 import { MultiState, SingleState } from './context'
@@ -56,4 +57,17 @@ export interface SelectPopoverTriggerProps<T = SingleState | MultiState>
     | ((
         props: (T & { isFocusVisible: boolean })
       ) => string)
+}
+
+export interface SelectPopoverClearButtonProps extends AriaButtonProps<'span'> {
+  className?: string
+}
+
+export interface MultiSelectPopoverItemProps extends HTMLAttributes<HTMLSpanElement> {
+  children?: ReactNode
+}
+
+export interface MultiSelectPopoverItemClearButtonProps extends AriaButtonProps<'span'> {
+  className?: string;
+  item: Node<ItemValueProps>
 }

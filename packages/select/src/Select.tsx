@@ -9,6 +9,7 @@ export const Select = (props: SelectProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',
+    disallowEmptySelection: false,
     children: (item: ItemValueProps) =>
       item.items ? (
       // eslint-disable-next-line react/no-children-prop

@@ -2,7 +2,7 @@ import React from 'react'
 import classcat from 'classcat'
 import { FaCheck, FaChevronDown } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
-import { Select, MultiSelect } from '../index'
+import { Select, MultiSelect, ItemValueProps } from '../index'
 
 export default {
   title: 'Example/Select',
@@ -160,7 +160,7 @@ const sectionItems = [
 ]
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = ({ items }: { items: object[] }) => {
+const Template = ({ items }: { items: ItemValueProps[] }) => {
   return (
     <Select items={items}>
       <Select.Label className="block text-sm font-medium mb-1 text-gray-700">Assigned to</Select.Label>
@@ -179,13 +179,18 @@ const Template = ({ items }: { items: object[] }) => {
                 <>
                   <img src={selectedItem.value.avatar} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
                   <span className="ml-3 block truncate">{selectedItem.value.name}</span>
+                  <Select.PopoverClearButton className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2">
+                    <IoMdClose className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                  </Select.PopoverClearButton>
                 </>
               ) : (
-                <span className="block truncate text-gray-400">Select</span>
+                <>
+                  <span className="block truncate text-gray-400">Select</span>
+                  <span className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                    <FaChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                  </span>
+                </>
               )}
-            </span>
-            <span className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-              <FaChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
             </span>
           </>
         )}
@@ -297,31 +302,31 @@ const Multi = () => {
       <MultiSelect.PopoverTrigger
         className={({
           isFocusVisible
-        }) => `relative w-full bg-white border rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default outline-none ${
+        }) => `relative w-full bg-white border rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default outline-none gap-1 flex items-center flex-wrap sm:text-sm ${
           isFocusVisible ? 'ring-indigo-500 border-indigo-500 ring-1' : 'border-gray-300'
-        } sm:text-sm"
+        }"
     `}
       >
-        {({ selectedItems, selectionManager }) => (
+        {({ selectedItems }) => (
           <>
-            <span className="flex items-center flex-wrap gap-1">
-              {selectedItems.length ? (
-                selectedItems.map((item) => (
-                  <span
-                    className="flex items-center gap-1 text-xs px-1 py-1 box-border block rounded bg-indigo-200"
-                    key={item.key}
-                  >
-                    {item.value.avatar ? <img alt={item.value.name} className="flex-shrink-0 h-4 w-4 rounded-full" src={item.value.avatar} /> : null}
-                    {item.value.name}
-                    <span aria-hidden="true" aria-label="remove select" onClick={(e) => selectionManager.toggleSelection(item.key)}>
-                      <IoMdClose className="h-3 w-3 text-indigo-400" />
-                    </span>
-                  </span>
-                ))
-              ) : (
-                <span className="block truncate text-gray-400">Select</span>
-              )}
-            </span>
+            {selectedItems.length ? (
+              selectedItems.map((item) => (
+                <MultiSelect.PopoverItem
+                  className="flex items-center gap-1 text-xs px-1 py-1 box-border block rounded bg-indigo-200"
+                  key={item.key}
+                >
+                  {item.value.avatar ? (
+                    <img alt={item.value.name} className="flex-shrink-0 h-4 w-4 rounded-full" src={item.value.avatar} />
+                  ) : null}
+                  {item.value.name}
+                  <MultiSelect.PopoverItemClearButton item={item}>
+                    <IoMdClose className="h-3 w-3 text-indigo-400" />
+                  </MultiSelect.PopoverItemClearButton>
+                </MultiSelect.PopoverItem>
+              ))
+            ) : (
+              <span className="block truncate text-gray-400">Select</span>
+            )}
             <span className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <FaChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
             </span>
