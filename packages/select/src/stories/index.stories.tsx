@@ -2,8 +2,8 @@ import React from 'react'
 import classcat from 'classcat'
 import { FaCheck, FaChevronDown } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
-import { Item } from '@headless-react/shared'
 import { Select, MultiSelect } from '../index'
+import { Item } from '@headless-react/shared'
 
 export default {
   title: 'Example/Select',
@@ -168,9 +168,9 @@ const Template = ({ items }: { items: Item[] }) => {
       <Select.PopoverTrigger
         className={({
           isFocusVisible
-        }) => `relative w-full bg-white border rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default outline-none ${
+        }) => `relative w-full bg-white border rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default outline-none sm:text-sm ${
           isFocusVisible ? 'ring-indigo-500 border-indigo-500 ring-1' : 'border-gray-300'
-        } sm:text-sm"
+        }"
     `}
       >
         {({ selectedItem }) => (
@@ -180,14 +180,14 @@ const Template = ({ items }: { items: Item[] }) => {
                 <>
                   <img src={selectedItem.value.avatar} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />
                   <span className="ml-3 block truncate">{selectedItem.value.name}</span>
-                  <Select.PopoverClearButton className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2">
+                  <Select.PopoverClearButton className="absolute ml-3 inset-y-0 right-0 flex justify-center items-center pr-2">
                     <IoMdClose className="h-5 w-5 text-gray-400" aria-hidden="true" />
                   </Select.PopoverClearButton>
                 </>
               ) : (
                 <>
                   <span className="block truncate text-gray-400">Select</span>
-                  <span className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <span className="absolute ml-3 inset-y-0 right-0 flex items-center justify-center pr-2 pointer-events-none">
                     <FaChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
                   </span>
                 </>
@@ -313,17 +313,14 @@ const Multi = () => {
             {selectedItems.length ? (
               selectedItems.map((item) => (
                 <MultiSelect.PopoverItem
-                  className="flex relative items-center justify-center gap-1 text-xs pl-1 py-1 pr-5 box-border block rounded bg-indigo-200"
+                  className="flex items-center gap-1 text-xs px-1 py-1 box-border block rounded bg-indigo-200"
                   key={item.key}
                 >
                   {item.value.avatar ? (
                     <img alt={item.value.name} className="flex-shrink-0 h-4 w-4 rounded-full" src={item.value.avatar} />
                   ) : null}
                   {item.value.name}
-                  <MultiSelect.PopoverItemClearButton
-                    className="h-3 w-3 absolute right-1 top-1/2 -translate-y-1/2"
-                    item={item}
-                  >
+                  <MultiSelect.PopoverItemClearButton className="flex-shrink-0 h-3 w-3" item={item}>
                     <IoMdClose className="h-3 w-3 text-indigo-400" />
                   </MultiSelect.PopoverItemClearButton>
                 </MultiSelect.PopoverItem>

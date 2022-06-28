@@ -1,42 +1,17 @@
 import {
-  CollectionBase,
   Node,
-  AsyncLoadable,
-  FocusableProps,
-  HelpTextProps,
-  InputBase,
-  LabelableProps,
   MultipleSelection,
-  TextInputBase,
   Selection,
-  Validation
+  SingleSelection
 } from '@react-types/shared'
+import { SelectProps } from '@react-types/select'
 import { useState } from 'react'
 import { MenuTriggerState, useMenuTriggerState } from '@react-stately/menu'
 import { ListState } from '@react-stately/list'
 import { useMultiSelectListState } from '@headless-react/shared'
 
 export interface MultiSelectProps<T>
-  extends CollectionBase<T>,
-    AsyncLoadable,
-    Omit<InputBase, 'isReadOnly'>,
-    Validation,
-    HelpTextProps,
-    LabelableProps,
-    TextInputBase,
-    Omit<MultipleSelection, 'disallowEmptySelection'>,
-    FocusableProps {
-  /** Sets the open state of the menu. */
-  isOpen?: boolean
-  /** Sets the default open state of the menu. */
-  defaultOpen?: boolean
-  /** Method that is called when the open state of the menu changes. */
-  onOpenChange?: (isOpen: boolean) => void
-  /**
-   * Whether the menu should automatically flip direction when space is limited.
-   * @default true
-   */
-  shouldFlip?: boolean
+  extends Omit<SelectProps<T>, keyof SingleSelection>, Omit<MultipleSelection, 'disallowEmptySelection'> {
   /**
    * Whether the menu should be closed on select.
    * @default false

@@ -24,7 +24,7 @@ export const Popover = (props: ComboBoxPopoverProps) => {
 
   return (
     <FocusScope restoreFocus>
-      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))}>
+      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))} className={props.className}>
         {props.children}
         <DismissButton onDismiss={state.close} />
       </div>

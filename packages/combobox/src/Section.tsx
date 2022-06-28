@@ -20,17 +20,17 @@ export const Section = (props: ComboBoxSectionProps) => {
         section
       }}
     >
-      <li {...mergeProps(itemProps, filterDOMProps(props))}>{typeof children === 'function' ? children?.({ section }) : children}</li>
+      <li {...mergeProps(itemProps, filterDOMProps(props))} className={props.className}>{typeof children === 'function' ? children?.({ section }) : children}</li>
     </ComboBoxSectionProvider>
   )
 }
 
 export const SectionHeading = (props: ComboBoxSectionHeadingProps) => {
   const { headingProps } = useComboBoxSectionContext()
-  return <span {...mergeProps(headingProps, filterDOMProps(props))}>{props.children}</span>
+  return <span {...mergeProps(headingProps, filterDOMProps(props))} className={props.className}>{props.children}</span>
 }
 
 export const SectionOptions = (props: ComboBoxSectionOptionsProps) => {
   const { groupProps } = useComboBoxSectionContext()
-  return <ul {...mergeProps(groupProps, filterDOMProps(props))}>{props.children}</ul>
+  return <ul {...mergeProps(groupProps, filterDOMProps(props))} className={props.className}>{props.children}</ul>
 }

@@ -5,5 +5,5 @@ import { SelectLabelProps } from './types'
 
 export const Label = (props: SelectLabelProps) => {
   const { labelProps } = useSelectContext()
-  return <label {...mergeProps(labelProps, filterDOMProps(props))} />
+  return <label {...mergeProps(labelProps, filterDOMProps(props))} className={props.className} />
 }

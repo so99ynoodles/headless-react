@@ -55,7 +55,7 @@ export const PopoverClearButton = (props: SelectPopoverClearButtonProps) => {
     },
     buttonRef
   )
-  return <span {...mergeProps(buttonProps, filterDOMProps(props))}>{props.children}</span>
+  return <span {...mergeProps(buttonProps, filterDOMProps(props))} className={props.className}>{props.children}</span>
 }
 
 export const Popover = (props: SelectMenuProps) => {
@@ -77,7 +77,7 @@ export const Popover = (props: SelectMenuProps) => {
 
   return (
     <FocusScope restoreFocus>
-      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))}>
+      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))} className={props.className}>
         {props.children}
         <DismissButton onDismiss={state.close} />
       </div>
@@ -105,5 +105,5 @@ export const PopoverItemClearButton = (props: MultiSelectPopoverItemClearButtonP
     },
     buttonRef
   )
-  return <span {...mergeProps(buttonProps, filterDOMProps(props))}>{props.children}</span>
+  return <span {...mergeProps(buttonProps, filterDOMProps(props))} className={props.className}>{props.children}</span>
 }

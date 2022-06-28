@@ -20,17 +20,17 @@ export const Section = (props: SelectSectionProps) => {
         section
       }}
     >
-      <li {...mergeProps(itemProps, filterDOMProps(props))}>{typeof children === 'function' ? children?.({ section }) : children}</li>
+      <li {...mergeProps(itemProps, filterDOMProps(props))} className={props.className}>{typeof children === 'function' ? children?.({ section }) : children}</li>
     </SelectSectionProvider>
   )
 }
 
 export const SectionHeading = (props: SelectSectionHeadingProps) => {
   const { headingProps } = useSelectSectionContext()
-  return <span {...mergeProps(headingProps, filterDOMProps(props))}>{props.children}</span>
+  return <span {...mergeProps(headingProps, filterDOMProps(props))} className={props.className}>{props.children}</span>
 }
 
 export const SectionOptions = (props: SelectSectionOptionsProps) => {
   const { groupProps } = useSelectSectionContext()
-  return <ul {...mergeProps(groupProps, filterDOMProps(props))}>{props.children}</ul>
+  return <ul {...mergeProps(groupProps, filterDOMProps(props))} className={props.className}>{props.children}</ul>
 }

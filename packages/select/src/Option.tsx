@@ -14,7 +14,7 @@ export const Options = (props: SelectOptionsProps) => {
   }
 
   return (
-    <ul ref={listRef} {...mergeProps(listBoxProps, filterDOMProps(props))}>
+    <ul ref={listRef} {...mergeProps(listBoxProps, filterDOMProps(props))} className={props.className}>
       {typeof props.children === 'function' ? props.children?.({ options: [...state.collection] }) : props.children}
     </ul>
   )
