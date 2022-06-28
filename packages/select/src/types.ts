@@ -1,12 +1,20 @@
-import { ReactNode, HTMLAttributes } from 'react'
+import { ReactNode, HTMLAttributes, Key } from 'react'
 import { AriaSelectProps } from '@react-types/select'
 import { Node } from '@react-types/shared'
 import { AriaMultiSelectProps } from './hooks/useMultiSelect'
 import { MultiState, SingleState } from './context'
 
-export type ItemValueProps = {
+type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
+  {
+    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>
+  }[Keys]
+
+type RequiredKeys = {
+  key: Key
+  id: Key
   [key: string | number]: any
 }
+export type ItemValueProps = RequireAtLeastOne<RequiredKeys, 'key' | 'id'>
 export interface MultiSelectProps extends Omit<AriaMultiSelectProps<ItemValueProps>, 'children'> {
   children?: ReactNode
   label?: string

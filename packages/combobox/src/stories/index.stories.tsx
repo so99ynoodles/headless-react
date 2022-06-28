@@ -96,7 +96,7 @@ const items = [
   }
 ]
 
-const AutoComplete = (props: ComboBoxProps & { label: string }) => {
+const AutoComplete = (props: ComboBoxProps) => {
   return (
     <ComboBox {...props}>
       <ComboBox.Label className="block text-sm font-medium mb-1 text-gray-700">{props.label}</ComboBox.Label>
