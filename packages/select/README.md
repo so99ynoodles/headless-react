@@ -11,7 +11,7 @@ $ npm install @headless-react/select
 ```jsx
 import { Select } from '@headless-react/select'
 
-const Select = ({
+const SelectExample = ({
   label,
   items
 }) => {
@@ -19,7 +19,7 @@ const Select = ({
     <Select items={items}>
       <Select.Label>{label}</Select.Label>
       <Select.PopoverTrigger>
-        {({ selectedItem }) => selectedItem.name}
+        {({ selectedItem }) => selectedItem.value.name}
       </Select.PopoverTrigger>
       <Select.Popover>
         <Select.Options>
@@ -33,4 +33,28 @@ const Select = ({
     </Select>
   )
 }
+
+const MultiSelectExample = () => {
+  return (
+    <MultiSelect items={items}>
+      <MultiSelect.Label>{label}</Select.Label>
+      <MultiSelect.PopoverTrigger>
+        {({ selectedItems }) => selectedItems.map(item => <span>{item.value.name}</span>)}
+      </MultiSelect.PopoverTrigger>
+      <MultiSelect.Popover>
+        <MultiSelect.Options>
+          {({ options }) => options.map(option => (
+            <MultiSelect.Option key={option.key} option={option}>
+              {option.name}
+            </MultiSelect.Option>
+          ))}
+        </MultiSelect.Options>
+      </MultiSelect.Popover>
+    </MultiSelect>
+  )
+}
 ```
+
+## Example
+
+[CodeSandBox Example](https://codesandbox.io/s/headless-react-select-rte4ze?file=/src/App.tsx)
