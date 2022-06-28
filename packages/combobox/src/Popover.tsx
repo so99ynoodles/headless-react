@@ -2,7 +2,7 @@ import React from 'react'
 import { useButton } from '@react-aria/button'
 import { FocusScope, useFocusRing } from '@react-aria/focus'
 import { DismissButton, useOverlay } from '@react-aria/overlays'
-import { filterDOMProps, mergeProps } from '@react-aria/utils'
+import { mergeProps } from '@react-aria/utils'
 import { useComboBoxContext } from './context'
 import { ComboBoxPopoverProps, ComboBoxPopoverTriggerProps } from './types'
 
@@ -24,7 +24,7 @@ export const Popover = (props: ComboBoxPopoverProps) => {
 
   return (
     <FocusScope restoreFocus>
-      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))} className={props.className}>
+      <div ref={overlayRef} {...mergeProps(overlayProps, props)} className={props.className}>
         {props.children}
         <DismissButton onDismiss={state.close} />
       </div>
@@ -38,7 +38,7 @@ export const PopoverTrigger = (props: ComboBoxPopoverTriggerProps) => {
   const { buttonProps } = useButton(triggerProps, triggerRef)
   return (
     <button
-      {...mergeProps(buttonProps, focusProps)}
+      {...mergeProps(buttonProps, focusProps, props)}
       ref={triggerRef}
       className={
         typeof props.className === 'string' ? props.className : props.className?.({ ...state, isFocusVisible })

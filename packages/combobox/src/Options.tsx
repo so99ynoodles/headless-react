@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useListBox, useOption } from '@react-aria/listbox'
-import { filterDOMProps, mergeProps } from '@react-aria/utils'
+import { mergeProps } from '@react-aria/utils'
 import { useComboBoxContext } from './context'
 import { ComboBoxOptionProps, ComboBoxOptionsProps } from './types'
 
@@ -13,7 +13,7 @@ export const Options = (props: ComboBoxOptionsProps) => {
   }
 
   return (
-    <ul ref={listBoxRef} {...mergeProps(listBoxProps, filterDOMProps(props))} className={props.className}>
+    <ul ref={listBoxRef} {...mergeProps(listBoxProps, props)} className={props.className}>
       {typeof props.children === 'function' ? props.children?.({ options: [...state.collection] }) : props.children}
     </ul>
   )
