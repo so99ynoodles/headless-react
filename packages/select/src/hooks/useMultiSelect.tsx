@@ -10,7 +10,7 @@ import { useField } from '@react-aria/label'
 import { useMenuTrigger } from '@react-aria/menu'
 import { MultiSelectState } from './useMultiSelectState'
 
-export interface MultiSelectProps<T> extends CollectionBase<T>, AsyncLoadable, Omit<InputBase, 'isReadOnly'>, Validation, HelpTextProps, LabelableProps, TextInputBase, Omit<MultipleSelection, 'disallowEmptySelection'>, FocusableProps {
+export interface MultiSelectProps<T> extends CollectionBase<T>, AsyncLoadable, Omit<InputBase, 'isReadOnly'>, Validation, HelpTextProps, LabelableProps, TextInputBase, MultipleSelection, FocusableProps {
   /** Sets the open state of the menu. */
   isOpen?: boolean,
   /** Sets the default open state of the menu. */

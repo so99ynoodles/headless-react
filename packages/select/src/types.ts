@@ -11,6 +11,8 @@ export interface MultiSelectProps extends Omit<AriaMultiSelectProps<ItemValuePro
   children?: ReactNode
   label?: string
   name?: string
+  disallowEmptySelection?: boolean
+  closeOnSelect?: boolean
 }
 export interface SelectProps extends Omit<AriaSelectProps<ItemValueProps>, 'children'> {
   children?: ReactNode

@@ -313,9 +313,9 @@ const Multi = () => {
                   >
                     {item.value.avatar ? <img alt={item.value.name} className="flex-shrink-0 h-4 w-4 rounded-full" src={item.value.avatar} /> : null}
                     {item.value.name}
-                    <button aria-hidden="true" onClick={() => selectionManager.toggleSelection(item.key)}>
+                    <span aria-hidden="true" aria-label="remove select" onClick={(e) => selectionManager.toggleSelection(item.key)}>
                       <IoMdClose className="h-3 w-3 text-indigo-400" />
-                    </button>
+                    </span>
                   </span>
                 ))
               ) : (

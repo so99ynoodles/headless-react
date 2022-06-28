@@ -9,6 +9,7 @@ export interface MultiSelectListProps<T> extends CollectionBase<T>, MultipleSele
   filter?: (nodes: Iterable<Node<T>>) => Iterable<Node<T>>
   /** @private */
   suppressTextValueWarning?: boolean
+  disallowEmptySelection?: boolean
 }
 
 export interface MultiSelectListState<T> extends ListState<T> {
@@ -29,7 +30,6 @@ export function useMultiSelectListState<T extends object>(props: MultiSelectList
   const { collection, disabledKeys, selectionManager } = useListState({
     ...props,
     selectionMode: 'multiple',
-    disallowEmptySelection: false,
     allowDuplicateSelectionEvents: true,
     selectedKeys,
     onSelectionChange: (keys: Selection) => {

@@ -37,6 +37,11 @@ export interface MultiSelectProps<T>
    * @default true
    */
   shouldFlip?: boolean
+  /**
+   * Whether the menu should be closed on select.
+   * @default false
+   */
+  closeOnSelect?: boolean
 }
 
 export interface MultiSelectState<T> extends ListState<T>, MenuTriggerState {
@@ -65,13 +70,13 @@ export function useMultiSelectState<T extends object>(props: MultiSelectProps<T>
       if (props.onSelectionChange != null) {
         props.onSelectionChange(keys)
       }
+      if (props.closeOnSelect) {
+        triggerState.close()
+      }
     }
   })
 
-  console.log(listState.selectedKeys)
-
   const [isFocused, setFocused] = useState(false)
-
   return {
     ...listState,
     ...triggerState,
