@@ -1,19 +1,8 @@
-import { HTMLAttributes, ReactNode, Key } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 import { ComboBoxState } from '@react-stately/combobox'
 import { AriaComboBoxProps } from '@react-types/combobox'
 import { Node } from '@react-types/shared'
-
-type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
-  {
-    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>
-  }[Keys]
-
-type RequiredKeys = {
-  key: Key
-  id: Key
-  [key: string | number]: any
-}
-export type Item = RequireAtLeastOne<RequiredKeys, 'key' | 'id'>
+import { Item } from '@headless-react/shared'
 export interface ComboBoxProps extends Omit<AriaComboBoxProps<Item>, 'children'> {
   children?: ReactNode
   label?: string

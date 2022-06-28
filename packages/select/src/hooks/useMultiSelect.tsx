@@ -9,7 +9,7 @@ import { useMenuTrigger } from '@react-aria/menu'
 import { MultiSelectState } from './useMultiSelectState'
 import { AriaSelectOptions, SelectAria } from '@react-aria/select'
 
-interface AriaMultiSelectOptions<T> extends Omit<AriaSelectOptions<T>, keyof SingleSelection>, MultipleSelection {}
+export interface AriaMultiSelectOptions<T> extends Omit<AriaSelectOptions<T>, keyof SingleSelection>, MultipleSelection {}
 export function useMultiSelect<T>(
   props: AriaMultiSelectOptions<T>,
   state: MultiSelectState<T>,

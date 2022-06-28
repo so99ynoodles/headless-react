@@ -3,10 +3,10 @@ import { AriaSelectProps } from '@react-types/select'
 import { AriaButtonProps } from '@react-types/button'
 import { Node } from '@react-types/shared'
 import { Item } from '@headless-react/shared'
-import { AriaMultiSelectProps } from './hooks/useMultiSelect'
+import { AriaMultiSelectOptions } from './hooks/useMultiSelect'
 import { MultiState, SingleState } from './context'
 
-export interface MultiSelectProps extends Omit<AriaMultiSelectProps<Item>, 'children'> {
+export interface MultiSelectProps extends Omit<AriaMultiSelectOptions<Item>, 'children'> {
   children?: ReactNode
   label?: string
   name?: string
