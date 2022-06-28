@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useButton } from '@react-aria/button'
 import { FocusScope, useFocusRing } from '@react-aria/focus'
 import { DismissButton, useOverlay } from '@react-aria/overlays'
-import { mergeProps } from '@react-aria/utils'
+import { filterDOMProps, mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
 import {
   ItemValueProps,
@@ -55,7 +55,7 @@ export const PopoverClearButton = (props: SelectPopoverClearButtonProps) => {
     },
     buttonRef
   )
-  return <span {...mergeProps(buttonProps, props)}>{props.children}</span>
+  return <span {...mergeProps(buttonProps, filterDOMProps(props))}>{props.children}</span>
 }
 
 export const Popover = (props: SelectMenuProps) => {
@@ -77,7 +77,7 @@ export const Popover = (props: SelectMenuProps) => {
 
   return (
     <FocusScope restoreFocus>
-      <div ref={overlayRef} {...mergeProps(overlayProps, props)}>
+      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))}>
         {props.children}
         <DismissButton onDismiss={state.close} />
       </div>
@@ -105,5 +105,5 @@ export const PopoverItemClearButton = (props: MultiSelectPopoverItemClearButtonP
     },
     buttonRef
   )
-  return <span {...mergeProps(buttonProps, props)}>{props.children}</span>
+  return <span {...mergeProps(buttonProps, filterDOMProps(props))}>{props.children}</span>
 }

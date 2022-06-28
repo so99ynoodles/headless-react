@@ -2,7 +2,7 @@ import React from 'react'
 import { useButton } from '@react-aria/button'
 import { FocusScope, useFocusRing } from '@react-aria/focus'
 import { DismissButton, useOverlay } from '@react-aria/overlays'
-import { mergeProps } from '@react-aria/utils'
+import { filterDOMProps, mergeProps } from '@react-aria/utils'
 import { useComboBoxContext } from './context'
 import { ComboBoxPopoverProps, ComboBoxPopoverTriggerProps } from './types'
 
@@ -24,7 +24,7 @@ export const Popover = (props: ComboBoxPopoverProps) => {
 
   return (
     <FocusScope restoreFocus>
-      <div ref={overlayRef} {...mergeProps(overlayProps, props)}>
+      <div ref={overlayRef} {...mergeProps(overlayProps, filterDOMProps(props))}>
         {props.children}
         <DismissButton onDismiss={state.close} />
       </div>

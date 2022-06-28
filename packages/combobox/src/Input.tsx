@@ -1,5 +1,5 @@
 import React from 'react'
-import { mergeProps } from '@react-aria/utils'
+import { filterDOMProps, mergeProps } from '@react-aria/utils'
 import { useComboBoxContext } from './context'
 import { ComboBoxInputGroupProps, ComboBoxInputProps } from './types'
 
@@ -22,7 +22,7 @@ export const Input = (props: ComboBoxInputProps) => {
   const { inputProps, inputRef, state } = useComboBoxContext()
   return (
     <input
-      {...mergeProps(inputProps, props)}
+      {...mergeProps(inputProps, filterDOMProps(props))}
       className={
         typeof props.className === 'string' ? props.className : props.className?.({ isFocused: state.isFocused })
       }

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useListBox, useOption } from '@react-aria/listbox'
-import { mergeProps } from '@react-aria/utils'
+import { filterDOMProps, mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
 import { SelectOptionProps, SelectOptionsProps } from './types'
 
@@ -14,7 +14,7 @@ export const Options = (props: SelectOptionsProps) => {
   }
 
   return (
-    <ul ref={listRef} {...mergeProps(listBoxProps, props)}>
+    <ul ref={listRef} {...mergeProps(listBoxProps, filterDOMProps(props))}>
       {typeof props.children === 'function' ? props.children?.({ options: [...state.collection] }) : props.children}
     </ul>
   )

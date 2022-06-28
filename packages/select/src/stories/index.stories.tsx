@@ -312,14 +312,17 @@ const Multi = () => {
             {selectedItems.length ? (
               selectedItems.map((item) => (
                 <MultiSelect.PopoverItem
-                  className="flex items-center gap-1 text-xs px-1 py-1 box-border block rounded bg-indigo-200"
+                  className="flex relative items-center justify-center gap-1 text-xs pl-1 py-1 pr-5 box-border block rounded bg-indigo-200"
                   key={item.key}
                 >
                   {item.value.avatar ? (
                     <img alt={item.value.name} className="flex-shrink-0 h-4 w-4 rounded-full" src={item.value.avatar} />
                   ) : null}
                   {item.value.name}
-                  <MultiSelect.PopoverItemClearButton item={item}>
+                  <MultiSelect.PopoverItemClearButton
+                    className="h-3 w-3 absolute right-1 top-1/2 -translate-y-1/2"
+                    item={item}
+                  >
                     <IoMdClose className="h-3 w-3 text-indigo-400" />
                   </MultiSelect.PopoverItemClearButton>
                 </MultiSelect.PopoverItem>
