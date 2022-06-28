@@ -14,8 +14,9 @@ type RequiredKeys = {
   [key: string | number]: any
 }
 export type ItemValueProps = RequireAtLeastOne<RequiredKeys, 'key' | 'id'>
-export interface ComboBoxProps extends Omit<AriaComboBoxProps<ItemValueProps>, 'children' | 'label'> {
+export interface ComboBoxProps extends Omit<AriaComboBoxProps<ItemValueProps>, 'children'> {
   children?: ReactNode
+  label?: string
 }
 export interface ComboBoxLabelProps extends HTMLAttributes<HTMLLabelElement> {}
 export interface ComboBoxPopoverProps extends HTMLAttributes<HTMLDivElement> {}
