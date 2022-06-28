@@ -4,16 +4,17 @@ import { useSelect } from '@react-aria/select'
 import { useListBoxSection } from '@react-aria/listbox'
 import { SelectState } from '@react-stately/select'
 import { ItemValueProps } from './types'
+import { MultiSelectState } from './hooks/useMultiSelectState'
+
+export type SingleState = SelectState<ItemValueProps>
+export type MultiState = MultiSelectState<ItemValueProps>
+interface ContextType<T> extends ReturnType<typeof useSelect> {
+  state: T
+  triggerRef: MutableRefObject<HTMLButtonElement | null>
+}
 
 const createSelectContext = () => {
-  const SelectContext = createContext<
-    |(ReturnType<typeof useSelect> & {
-        state: SelectState<ItemValueProps>
-        triggerRef: MutableRefObject<HTMLButtonElement | null>
-      })
-      | undefined
-      >(undefined)
-
+  const SelectContext = createContext<ContextType<SingleState | MultiState> | undefined>(undefined)
   const useSelectContext = () => {
     const context = useContext(SelectContext)
     if (!context) {

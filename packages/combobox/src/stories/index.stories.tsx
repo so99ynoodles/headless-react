@@ -2,7 +2,7 @@ import classcat from 'classcat'
 import React from 'react'
 import { FaCheck, FaChevronDown, FaSearch } from 'react-icons/fa'
 // import { useAsyncList } from 'react-stately'
-import { ComboBox, ComboBoxProps } from './index'
+import { ComboBox, ComboBoxProps } from '../index'
 
 export default {
   title: 'Example/ComboBox',
@@ -96,7 +96,7 @@ const items = [
   }
 ]
 
-const AutoComplete = (props: ComboBoxProps) => {
+const AutoComplete = (props: ComboBoxProps & { label: string }) => {
   return (
     <ComboBox {...props}>
       <ComboBox.Label className="block text-sm font-medium mb-1 text-gray-700">{props.label}</ComboBox.Label>

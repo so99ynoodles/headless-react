@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
-import { HiddenSelect, useSelect } from '@react-aria/select'
-import { useSelectState } from '@react-stately/select'
 import { Item, Section } from '@react-stately/collections'
-import { SelectProps, ItemValueProps } from './types'
+import { useMultiSelectState } from './hooks/useMultiSelectState'
+import { ItemValueProps, MultiSelectProps } from './types'
 import { SelectProvider } from './context'
+import { useMultiSelect } from './hooks/useMultiSelect'
 
-export const Select = (props: SelectProps) => {
+export const MultiSelect = (props: MultiSelectProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',
@@ -17,9 +17,9 @@ export const Select = (props: SelectProps) => {
       <Item key={item.key}>{item.name}</Item>
       )
   }
-  const state = useSelectState(ariaProps)
+  const state = useMultiSelectState(ariaProps)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
-  const selectAria = useSelect(ariaProps, state, triggerRef)
+  const selectAria = useMultiSelect(ariaProps, state, triggerRef)
   return (
     <SelectProvider
       value={{
@@ -29,7 +29,6 @@ export const Select = (props: SelectProps) => {
       }}
     >
       {props.children}
-      <HiddenSelect state={state} triggerRef={triggerRef} name={props.name} label={props.label} />
     </SelectProvider>
   )
 }

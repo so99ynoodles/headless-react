@@ -1,10 +1,16 @@
 import { ReactNode, HTMLAttributes } from 'react'
-import { SelectState } from '@react-stately/select'
 import { AriaSelectProps } from '@react-types/select'
 import { Node } from '@react-types/shared'
+import { AriaMultiSelectProps } from './hooks/useMultiSelect'
+import { MultiState, SingleState } from './context'
 
 export type ItemValueProps = {
   [key: string | number]: any
+}
+export interface MultiSelectProps extends Omit<AriaMultiSelectProps<ItemValueProps>, 'children'> {
+  children?: ReactNode
+  label?: string
+  name?: string
 }
 export interface SelectProps extends Omit<AriaSelectProps<ItemValueProps>, 'children'> {
   children?: ReactNode
@@ -31,9 +37,13 @@ export interface SelectSectionProps extends Omit<HTMLAttributes<HTMLLIElement>, 
 }
 export interface SelectSectionOptionsProps extends HTMLAttributes<HTMLUListElement> {}
 export interface SelectSectionHeadingProps extends HTMLAttributes<HTMLSpanElement> {}
-export interface SelectPopoverTriggerProps
+export interface SelectPopoverTriggerProps<T = SingleState | MultiState>
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'placeholder' | 'children' | 'className'> {
   placeholder?: ReactNode
-  children: (props: { selectedItem: ItemValueProps }) => ReactNode
-  className?: string | ((props: SelectState<ItemValueProps> & { isFocusVisible: boolean }) => string)
+  children: ReactNode | ((props: T extends SingleState ? { selectedItem: Node<ItemValueProps> } & SingleState : { selectedItems: Node<ItemValueProps>[] } & MultiState) => ReactNode)
+  className?:
+    | string
+    | ((
+        props: (T & { isFocusVisible: boolean })
+      ) => string)
 }

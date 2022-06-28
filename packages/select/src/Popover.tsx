@@ -4,12 +4,15 @@ import { FocusScope, useFocusRing } from '@react-aria/focus'
 import { DismissButton, useOverlay } from '@react-aria/overlays'
 import { mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
-import { SelectMenuProps, SelectPopoverTriggerProps } from './types'
+import { ItemValueProps, SelectMenuProps, SelectPopoverTriggerProps } from './types'
+import { MultiSelectState } from './hooks/useMultiSelectState'
+import { SelectState } from '@react-stately/select'
 
 export const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
   const { triggerProps, valueProps, triggerRef, state } = useSelectContext()
   const { focusProps, isFocusVisible } = useFocusRing()
   const { buttonProps } = useButton(triggerProps, triggerRef)
+
   return (
     <button
       {...mergeProps(buttonProps, valueProps, focusProps)}
@@ -18,7 +21,13 @@ export const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
         typeof props.className === 'string' ? props.className : props.className?.({ ...state, isFocusVisible })
       }
     >
-      {props.children({ selectedItem: state.selectedItem?.value })}
+      {typeof props.children === 'function'
+        ? props.children(
+          state.selectionManager.selectionMode === 'multiple'
+            ? { ...state, selectedItems: (state as MultiSelectState<ItemValueProps>).selectedItems }
+            : { ...state, selectedItem: (state as SelectState<ItemValueProps>).selectedItem }
+        )
+        : props.children}
     </button>
   )
 }

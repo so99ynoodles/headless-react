@@ -23,6 +23,7 @@
     ],
     "rules": {
         "multiline-ternary": "off",
-        "prettier/prettier": "off"
+        "prettier/prettier": "off",
+        "space-before-function-paren": "off"
     }
 }

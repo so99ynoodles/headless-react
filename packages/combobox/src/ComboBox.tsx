@@ -9,7 +9,6 @@ import { ComboBoxProps, ItemValueProps } from './types'
 export const ComboBox = (props: ComboBoxProps) => {
   const ariaProps = {
     ...props,
-    label: 'x',
     children: (item: ItemValueProps) =>
       item.items ? (
         // eslint-disable-next-line react/no-children-prop
