@@ -14,7 +14,7 @@ import {
 import { useState } from 'react'
 import { MenuTriggerState, useMenuTriggerState } from '@react-stately/menu'
 import { ListState } from '@react-stately/list'
-import { useMultiSelectListState } from './useMultiSelectListState'
+import { useMultiSelectListState } from '@headless-react/shared'
 
 export interface MultiSelectProps<T>
   extends CollectionBase<T>,

@@ -3,11 +3,11 @@ import { Node } from '@react-types/shared'
 import { useSelect } from '@react-aria/select'
 import { useListBoxSection } from '@react-aria/listbox'
 import { SelectState } from '@react-stately/select'
-import { ItemValueProps } from './types'
+import { Item } from './types'
 import { MultiSelectState } from './hooks/useMultiSelectState'
 
-export type SingleState = SelectState<ItemValueProps>
-export type MultiState = MultiSelectState<ItemValueProps>
+export type SingleState = SelectState<Item>
+export type MultiState = MultiSelectState<Item>
 interface ContextType<T> extends ReturnType<typeof useSelect> {
   state: T
   triggerRef: MutableRefObject<HTMLButtonElement | null>
@@ -30,7 +30,7 @@ const createSelectContext = () => {
 const createSelectSectionContext = () => {
   const SelectSectionContext = createContext<
     |(ReturnType<typeof useListBoxSection> & {
-        section: Node<ItemValueProps>
+        section: Node<Item>
       })
       | undefined
       >(undefined)
@@ -48,7 +48,7 @@ const createSelectSectionContext = () => {
 }
 
 const createMultiSelectPopoverContext = () => {
-  const MultiSelectPopoverContext = createContext<Node<ItemValueProps> | undefined>(undefined)
+  const MultiSelectPopoverContext = createContext<Node<Item> | undefined>(undefined)
 
   const useMultiSelectPopoverContext = () => {
     const context = useContext(MultiSelectPopoverContext)

@@ -1,7 +1,6 @@
 import classcat from 'classcat'
 import React from 'react'
 import { FaCheck, FaChevronDown, FaSearch } from 'react-icons/fa'
-// import { useAsyncList } from 'react-stately'
 import { ComboBox, ComboBoxProps } from '../index'
 
 export default {

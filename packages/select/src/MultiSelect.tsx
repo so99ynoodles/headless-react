@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
-import { Item, Section } from '@react-stately/collections'
+import { Item as CollectionItem, Section } from '@react-stately/collections'
+import { Item } from '@headless-react/shared'
 import { useMultiSelectState } from './hooks/useMultiSelectState'
-import { ItemValueProps, MultiSelectProps } from './types'
+import { MultiSelectProps } from './types'
 import { SelectProvider } from './context'
 import { useMultiSelect } from './hooks/useMultiSelect'
 import { MultiHiddenSelectProps, useMultiHiddenSelect } from './hooks/useMultiHiddenSelect'
@@ -10,17 +11,17 @@ export const MultiSelect = (props: MultiSelectProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',
-    children: (item: ItemValueProps) =>
+    children: (item: Item) =>
       item.items ? (
         <Section
           key={item.key}
           title={item.name}
           items={item.items}
           // eslint-disable-next-line react/no-children-prop
-          children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>}
+          children={(item: Item) => <CollectionItem key={item.key}>{item.name}</CollectionItem>}
         />
       ) : (
-        <Item key={item.key}>{item.name}</Item>
+        <CollectionItem key={item.key}>{item.name}</CollectionItem>
       )
   }
   const state = useMultiSelectState(ariaProps)

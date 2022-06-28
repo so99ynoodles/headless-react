@@ -3,12 +3,12 @@ import { useComboBox } from '@react-aria/combobox'
 import { useListBoxSection } from '@react-aria/listbox'
 import { ComboBoxState } from '@react-stately/combobox'
 import { Node } from '@react-types/shared'
-import { ItemValueProps } from './types'
+import { Item } from '@headless-react/shared'
 
 const createComboBoxContext = () => {
   const ComboBoxContext = createContext<
     |(ReturnType<typeof useComboBox> & {
-        state: ComboBoxState<ItemValueProps>
+        state: ComboBoxState<Item>
         inputRef: MutableRefObject<HTMLInputElement | null>
         listBoxRef: MutableRefObject<HTMLUListElement | null>
         popoverRef: MutableRefObject<HTMLDivElement | null>
@@ -32,7 +32,7 @@ const createComboBoxContext = () => {
 const createComboBoxSectionContext = () => {
   const ComboBoxSectionContext = createContext<
     |(ReturnType<typeof useListBoxSection> & {
-        section: Node<ItemValueProps>
+        section: Node<Item>
       })
       | undefined
       >(undefined)

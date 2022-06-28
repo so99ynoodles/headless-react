@@ -2,7 +2,8 @@ import React from 'react'
 import classcat from 'classcat'
 import { FaCheck, FaChevronDown } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
-import { Select, MultiSelect, ItemValueProps } from '../index'
+import { Item } from '@headless-react/shared'
+import { Select, MultiSelect } from '../index'
 
 export default {
   title: 'Example/Select',
@@ -160,7 +161,7 @@ const sectionItems = [
 ]
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = ({ items }: { items: ItemValueProps[] }) => {
+const Template = ({ items }: { items: Item[] }) => {
   return (
     <Select items={items}>
       <Select.Label className="block text-sm font-medium mb-1 text-gray-700">Assigned to</Select.Label>

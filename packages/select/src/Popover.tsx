@@ -5,13 +5,13 @@ import { DismissButton, useOverlay } from '@react-aria/overlays'
 import { filterDOMProps, mergeProps } from '@react-aria/utils'
 import { useSelectContext } from './context'
 import {
-  ItemValueProps,
   MultiSelectPopoverItemClearButtonProps,
   MultiSelectPopoverItemProps,
   SelectMenuProps,
   SelectPopoverClearButtonProps,
   SelectPopoverTriggerProps
 } from './types'
+import { Item } from '@headless-react/shared'
 import { MultiSelectState } from './hooks/useMultiSelectState'
 import { SelectState } from '@react-stately/select'
 
@@ -31,8 +31,8 @@ export const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
       {typeof props.children === 'function'
         ? props.children(
           state.selectionManager.selectionMode === 'multiple'
-            ? { ...state, selectedItems: (state as MultiSelectState<ItemValueProps>).selectedItems }
-            : { ...state, selectedItem: (state as SelectState<ItemValueProps>).selectedItem }
+            ? { ...state, selectedItems: (state as MultiSelectState<Item>).selectedItems }
+            : { ...state, selectedItem: (state as SelectState<Item>).selectedItem }
         )
         : props.children}
     </button>
@@ -49,7 +49,7 @@ export const PopoverClearButton = (props: SelectPopoverClearButtonProps) => {
         if (props.onPress) {
           props.onPress(e)
         } else {
-          (state as SelectState<ItemValueProps>).selectionManager.setSelectedKeys(new Set())
+          (state as SelectState<Item>).selectionManager.setSelectedKeys(new Set())
         }
       }
     },
@@ -99,7 +99,7 @@ export const PopoverItemClearButton = (props: MultiSelectPopoverItemClearButtonP
         if (props.onPress) {
           props.onPress(e)
         } else {
-          (state as MultiSelectState<ItemValueProps>).selectionManager.toggleSelection(props.item.key)
+          (state as MultiSelectState<Item>).selectionManager.toggleSelection(props.item.key)
         }
       }
     },

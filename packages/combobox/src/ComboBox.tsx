@@ -1,21 +1,22 @@
 import React, { useRef } from 'react'
-import { Item, Section } from '@react-stately/collections'
+import { Item as CollectionItem, Section } from '@react-stately/collections'
 import { useFilter } from '@react-aria/i18n'
 import { useComboBox } from '@react-aria/combobox'
 import { useComboBoxState } from '@react-stately/combobox'
+import { Item } from '@headless-react/shared'
 import { ComboBoxProvider } from './context'
-import { ComboBoxProps, ItemValueProps } from './types'
+import { ComboBoxProps } from './types'
 
 export const ComboBox = (props: ComboBoxProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',
-    children: (item: ItemValueProps) =>
+    children: (item: Item) =>
       item.items ? (
         // eslint-disable-next-line react/no-children-prop
-        <Section key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
+        <Section key={item.key} title={item.name} items={item.items} children={(item: Item) => <CollectionItem key={item.key}>{item.name}</CollectionItem>} />
       ) : (
-        <Item key={item.key}>{item.name}</Item>
+        <CollectionItem key={item.key}>{item.name}</CollectionItem>
       )
   }
   const { contains } = useFilter({ sensitivity: 'base' })

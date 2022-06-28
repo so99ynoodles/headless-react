@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from '@react-aria/select'
 import { useSelectState } from '@react-stately/select'
-import { Item, Section } from '@react-stately/collections'
-import { SelectProps, ItemValueProps } from './types'
+import { Item as CollectionItem, Section } from '@react-stately/collections'
+import { Item } from '@headless-react/shared'
+import { SelectProps } from './types'
 import { SelectProvider } from './context'
 
 export const Select = (props: SelectProps) => {
@@ -10,12 +11,12 @@ export const Select = (props: SelectProps) => {
     ...props,
     label: props.label || 'x',
     disallowEmptySelection: false,
-    children: (item: ItemValueProps) =>
+    children: (item: Item) =>
       item.items ? (
       // eslint-disable-next-line react/no-children-prop
-      <Section key={item.key} title={item.name} items={item.items} children={(item: ItemValueProps) => <Item key={item.key}>{item.name}</Item>} />
+      <Section key={item.key} title={item.name} items={item.items} children={(item: Item) => <CollectionItem key={item.key}>{item.name}</CollectionItem>} />
       ) : (
-      <Item key={item.key}>{item.name}</Item>
+      <CollectionItem key={item.key}>{item.name}</CollectionItem>
       )
   }
   const state = useSelectState(ariaProps)
