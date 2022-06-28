@@ -1,7 +1,7 @@
 {
   "name": "@headless-react/select",
   "description": "Headless React components using react-stately and react-aria",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "source": "src/index.ts",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
