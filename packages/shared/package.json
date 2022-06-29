@@ -1,7 +1,7 @@
 {
   "name": "@headless-react/shared",
   "description": "Headless React components using react-stately and react-aria",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "source": "src/index.ts",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
