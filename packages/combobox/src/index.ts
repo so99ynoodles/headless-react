@@ -37,4 +37,5 @@ export const MultiComboBox = Object.assign(MultiComboBoxRoot, {
   SectionOptions
 })
 
+export * from './hooks'
 export * from './types'
