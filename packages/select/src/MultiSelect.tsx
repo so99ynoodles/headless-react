@@ -1,11 +1,9 @@
 import React, { useRef } from 'react'
 import { Item as CollectionItem, Section } from '@react-stately/collections'
 import { Item } from '@headless-react/shared'
-import { useMultiSelectState } from './hooks/useMultiSelectState'
 import { MultiHiddenSelectProps, MultiSelectRootProps } from './types'
 import { SelectProvider } from './context'
-import { useMultiSelect } from './hooks/useMultiSelect'
-import { useMultiHiddenSelect } from './hooks/useMultiHiddenSelect'
+import { useMultiHiddenSelect, useMultiSelect, useMultiSelectState } from './hooks'
 
 export const MultiSelect = (props: MultiSelectRootProps) => {
   const ariaProps = {

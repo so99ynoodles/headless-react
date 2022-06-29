@@ -33,4 +33,5 @@ export const MultiSelect = Object.assign(MultiSelectRoot, {
   SectionOptions
 })
 
+export * from './hooks'
 export * from './types'

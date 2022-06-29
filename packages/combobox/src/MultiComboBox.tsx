@@ -4,8 +4,7 @@ import { useFilter } from '@react-aria/i18n'
 import { Item } from '@headless-react/shared'
 import { ComboBoxProvider } from './context'
 import { MultiComboBoxRootProps } from './types'
-import { useMultiComboBoxState } from './hooks/useMultiComboBoxState'
-import { useMultiComboBox } from './hooks/useMultiComboBox'
+import { useMultiComboBoxState, useMultiComboBox } from './hooks'
 
 export const MultiComboBox = (props: MultiComboBoxRootProps) => {
   const ariaProps = {
