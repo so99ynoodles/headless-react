@@ -2,12 +2,12 @@ import React, { useRef } from 'react'
 import { Item as CollectionItem, Section } from '@react-stately/collections'
 import { Item } from '@headless-react/shared'
 import { useMultiSelectState } from './hooks/useMultiSelectState'
-import { MultiSelectProps } from './types'
+import { MultiHiddenSelectProps, MultiSelectRootProps } from './types'
 import { SelectProvider } from './context'
 import { useMultiSelect } from './hooks/useMultiSelect'
-import { MultiHiddenSelectProps, useMultiHiddenSelect } from './hooks/useMultiHiddenSelect'
+import { useMultiHiddenSelect } from './hooks/useMultiHiddenSelect'
 
-export const MultiSelect = (props: MultiSelectProps) => {
+export const MultiSelect = (props: MultiSelectRootProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',
@@ -71,7 +71,7 @@ function MultiHiddenSelect<T>(props: MultiHiddenSelectProps<T>) {
   } else if (name) {
     return (
       <>
-        {[...state.selectedKeys].map((key) => (
+        {[...(state.selectedKeys)].map((key) => (
           <input
             key={key}
             type="hidden"

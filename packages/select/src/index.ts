@@ -32,4 +32,5 @@ export const MultiSelect = Object.assign(MultiSelectRoot, {
   SectionHeading,
   SectionOptions
 })
+
 export * from './types'

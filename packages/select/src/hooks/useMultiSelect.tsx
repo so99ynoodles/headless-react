@@ -1,15 +1,13 @@
 import { chain, filterDOMProps, mergeProps, useId } from '@react-aria/utils'
 import { FocusEvent, RefObject, useMemo } from 'react'
-import { SingleSelection, MultipleSelection } from '@react-types/shared'
 import { ListKeyboardDelegate, useTypeSelect } from '@react-aria/selection'
 import { setInteractionModality } from '@react-aria/interactions'
 import { useCollator } from '@react-aria/i18n'
 import { useField } from '@react-aria/label'
 import { useMenuTrigger } from '@react-aria/menu'
-import { MultiSelectState } from './useMultiSelectState'
-import { AriaSelectOptions, SelectAria } from '@react-aria/select'
+import { SelectAria } from '@react-aria/select'
+import { AriaMultiSelectOptions, MultiSelectState } from '../types'
 
-export interface AriaMultiSelectOptions<T> extends Omit<AriaSelectOptions<T>, keyof SingleSelection>, MultipleSelection {}
 export function useMultiSelect<T>(
   props: AriaMultiSelectOptions<T>,
   state: MultiSelectState<T>,

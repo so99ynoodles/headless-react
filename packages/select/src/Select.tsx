@@ -3,10 +3,10 @@ import { HiddenSelect, useSelect } from '@react-aria/select'
 import { useSelectState } from '@react-stately/select'
 import { Item as CollectionItem, Section } from '@react-stately/collections'
 import { Item } from '@headless-react/shared'
-import { SelectProps } from './types'
+import { SelectRootProps } from './types'
 import { SelectProvider } from './context'
 
-export const Select = (props: SelectProps) => {
+export const Select = (props: SelectRootProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',

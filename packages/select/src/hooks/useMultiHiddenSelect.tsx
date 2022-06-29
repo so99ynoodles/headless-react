@@ -1,16 +1,7 @@
 import { useInteractionModality } from '@react-aria/interactions'
-import { AriaHiddenSelectProps } from '@react-aria/select'
 import { useVisuallyHidden } from '@react-aria/visually-hidden'
 import { ChangeEvent, RefObject } from 'react'
-import { MultiSelectState } from './useMultiSelectState'
-
-export interface MultiHiddenSelectProps<T> extends AriaHiddenSelectProps {
-  /** State for the select. */
-  state: MultiSelectState<T>,
-
-  /** A ref to the trigger element. */
-  triggerRef: RefObject<HTMLElement>
-}
+import { MultiHiddenSelectProps, MultiSelectState } from '../types'
 
 export function useMultiHiddenSelect<T>(props: MultiHiddenSelectProps<T>, state: MultiSelectState<T>, triggerRef: RefObject<HTMLElement>) {
   const { autoComplete, name, isDisabled } = props

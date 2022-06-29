@@ -3,8 +3,8 @@ import { Node } from '@react-types/shared'
 import { useSelect } from '@react-aria/select'
 import { useListBoxSection } from '@react-aria/listbox'
 import { SelectState } from '@react-stately/select'
-import { MultiSelectState } from './hooks/useMultiSelectState'
 import { Item } from '@headless-react/shared'
+import { MultiSelectState } from './types'
 
 export type SingleState = SelectState<Item>
 export type MultiState = MultiSelectState<Item>

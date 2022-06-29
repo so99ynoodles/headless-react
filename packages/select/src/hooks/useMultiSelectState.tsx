@@ -1,36 +1,10 @@
 import {
-  Node,
-  MultipleSelection,
-  Selection,
-  SingleSelection
+  Selection
 } from '@react-types/shared'
-import { SelectProps } from '@react-types/select'
 import { useState } from 'react'
-import { MenuTriggerState, useMenuTriggerState } from '@react-stately/menu'
-import { ListState } from '@react-stately/list'
+import { useMenuTriggerState } from '@react-stately/menu'
 import { useMultiSelectListState } from '@headless-react/shared'
-
-export interface MultiSelectProps<T>
-  extends Omit<SelectProps<T>, keyof SingleSelection>, Omit<MultipleSelection, 'disallowEmptySelection'> {
-  /**
-   * Whether the menu should be closed on select.
-   * @default false
-   */
-  closeOnSelect?: boolean
-}
-
-export interface MultiSelectState<T> extends ListState<T>, MenuTriggerState {
-  /** Whether the select is currently focused. */
-  readonly isFocused: boolean
-  /** Sets whether the select is focused. */
-  setFocused(isFocused: boolean): void
-  /** The key for the currently selected item. */
-  readonly selectedKeys: Selection
-  /** Sets the selected keys. */
-  setSelectedKeys(keys: Selection): void
-  /** The value of the currently selected item. */
-  readonly selectedItems: Node<T>[]
-}
+import { MultiSelectProps, MultiSelectState } from '../types'
 
 /**
  * Provides state management for a select component. Handles building a collection

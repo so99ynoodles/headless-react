@@ -1,19 +1,53 @@
-import { ReactNode, HTMLAttributes } from 'react'
-import { AriaSelectProps } from '@react-types/select'
+import { ReactNode, HTMLAttributes, RefObject } from 'react'
+import { AriaSelectProps, SelectProps } from '@react-types/select'
 import { AriaButtonProps } from '@react-types/button'
-import { Node } from '@react-types/shared'
+import { Node, SingleSelection, MultipleSelection, Selection } from '@react-types/shared'
 import { Item } from '@headless-react/shared'
-import { AriaMultiSelectOptions } from './hooks/useMultiSelect'
 import { MultiState, SingleState } from './context'
+import { AriaHiddenSelectProps, AriaSelectOptions } from '@react-aria/select'
+import { MenuTriggerState } from '@react-stately/menu'
+import { ListState } from '@react-stately/list'
 
-export interface MultiSelectProps extends Omit<AriaMultiSelectOptions<Item>, 'children'> {
+export interface MultiSelectProps<T>
+  extends Omit<SelectProps<T>, keyof SingleSelection>, Omit<MultipleSelection, 'disallowEmptySelection'> {
+  /**
+   * Whether the menu should be closed on select.
+   * @default false
+   */
+  closeOnSelect?: boolean
+}
+
+export interface MultiSelectState<T> extends ListState<T>, MenuTriggerState {
+  /** Whether the select is currently focused. */
+  readonly isFocused: boolean
+  /** Sets whether the select is focused. */
+  setFocused(isFocused: boolean): void
+  /** The key for the currently selected item. */
+  readonly selectedKeys: Selection
+  /** Sets the selected keys. */
+  setSelectedKeys(keys: Selection): void
+  /** The value of the currently selected item. */
+  readonly selectedItems: Node<T>[]
+}
+
+export interface AriaMultiSelectOptions<T> extends Omit<AriaSelectOptions<T>, keyof SingleSelection>, MultipleSelection {}
+
+export interface MultiHiddenSelectProps<T> extends AriaHiddenSelectProps {
+  /** State for the select. */
+  state: MultiSelectState<T>,
+
+  /** A ref to the trigger element. */
+  triggerRef: RefObject<HTMLElement>
+}
+
+export interface MultiSelectRootProps extends Omit<AriaMultiSelectOptions<Item>, 'children'> {
   children?: ReactNode
   label?: string
   name?: string
   disallowEmptySelection?: boolean
   closeOnSelect?: boolean
 }
-export interface SelectProps extends Omit<AriaSelectProps<Item>, 'children'> {
+export interface SelectRootProps extends Omit<AriaSelectProps<Item>, 'children'> {
   children?: ReactNode
   label?: string
   name?: string

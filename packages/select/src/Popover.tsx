@@ -7,12 +7,12 @@ import { useSelectContext } from './context'
 import {
   MultiSelectPopoverItemClearButtonProps,
   MultiSelectPopoverItemProps,
+  MultiSelectState,
   SelectMenuProps,
   SelectPopoverClearButtonProps,
   SelectPopoverTriggerProps
 } from './types'
 import { Item } from '@headless-react/shared'
-import { MultiSelectState } from './hooks/useMultiSelectState'
 import { SelectState } from '@react-stately/select'
 
 export const PopoverTrigger = (props: SelectPopoverTriggerProps) => {
