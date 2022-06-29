@@ -1,7 +1,7 @@
 {
   "name": "@headless-react/combobox",
   "description": "Headless React components using react-stately and react-aria",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "source": "src/index.ts",
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -29,8 +29,8 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "@headless-react/select": "^0.0.13",
-    "@headless-react/shared": "^0.0.13",
+    "@headless-react/select": "^0.0.14",
+    "@headless-react/shared": "^0.0.14",
     "@react-aria/button": "^3.5.1",
     "@react-aria/combobox": "^3.3.1",
     "@react-aria/focus": "^3.6.1",
