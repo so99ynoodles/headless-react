@@ -11,35 +11,24 @@ $ npm install @headless-react/menu
 ```jsx
 import { Menu } from '@headless-react/menu'
 
-const AutoComplete = ({
-  label,
-  items
-}) => {
+const MenuExample = () => {
   return (
-    <ComboBox defaultItems={items}>
-      <ComboBox.Label>{label}</ComboBox.Label>
-      <ComboBox.InputGroup>
-        {({ selectedItem }) => (
-          <>
-            <ComboBox.Input />
-            <ComboBox.PopoverTrigger />
-          </>
-        )}
-      </ComboBox.InputGroup>
-      <ComboBox.Popover>
-        <ComboBox.Options>
-          {({ options }) => options.map(option => (
-            <ComboBox.Option key={option.key} option={option}>
-              {option.name}
-            </ComboBox.Option>
-          ))}
-        </ComboBox.Options>
-      </ComboBox.Popover>
-    </ComboBox>
+    <Menu onAction={actionFunction}>
+      <Menu.Button>
+        Open Menu
+      </Menu.Button>
+      <Menu.Overlay>
+        <Menu.Popup>
+          <Menu.Item>Item 1</Menu.Item>
+          <Menu.Item>Item 2</Menu.Item>
+          <Menu.Item>Item 3</Menu.Item>
+        </Menu.Popup>
+      </Menu.Overlay>
+    </Menu>
   )
 }
 ```
 
 ## Example
 
-[CodeSandBox Example](https://codesandbox.io/s/headless-react-combobox-yseg1j?file=/src/App.tsx)
+[CodeSandBox Example](https://codesandbox.io/s/headless-react-menu-ij01ux?file=/src/App.tsx)
