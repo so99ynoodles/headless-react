@@ -47,13 +47,14 @@ const AutoComplete = ({
 ```
 
 ## Components
+- [x] Button
 - [x] ComboBox
   - [x] Single
   - [x] Multi
 - [x] Select
   - [x] Single
   - [x] Multi
-- [ ] Menu
+- [x] Menu
 - [ ] RadioGroup
 
 ...something I need
@@ -62,3 +63,4 @@ const AutoComplete = ({
 
 - [Select Example](https://codesandbox.io/s/headless-react-select-rte4ze?file=/src/App.tsx)
 - [ComboBox Example](https://codesandbox.io/s/headless-react-combobox-yseg1j?file=/src/App.tsx)
+- [Menu Example](https://codesandbox.io/s/headless-react-menu-ij01ux?file=/src/App.tsx)
