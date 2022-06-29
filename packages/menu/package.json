@@ -1,0 +1,58 @@
+{
+  "name": "@headless-react/menu",
+  "description": "Headless React components using react-stately and react-aria",
+  "version": "0.0.15",
+  "source": "src/index.ts",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/so99ynoodles/headless-react"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "build": "rollup -c --environment BUILD:production",
+    "build:npm": "yarn build",
+    "build:watch": "yarn build:npm -w --watch.include './src/**'",
+    "clean": "rm -rf ./lib ./tsconfig.tsbuildinfo .rollup.cache"
+  },
+  "keywords": [
+    "react",
+    "react-aria",
+    "react-stately"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@headless-react/shared": "^0.0.15",
+    "@react-aria/button": "^3.5.1",
+    "@react-aria/combobox": "^3.3.1",
+    "@react-aria/focus": "^3.6.1",
+    "@react-aria/interactions": "^3.9.1",
+    "@react-aria/listbox": "^3.5.1",
+    "@react-aria/menu": "^3.5.1",
+    "@react-aria/overlays": "^3.9.1",
+    "@react-aria/separator": "^3.2.1",
+    "@react-aria/utils": "^3.13.1",
+    "@react-stately/collections": "^3.4.1",
+    "@react-stately/menu": "^3.3.1",
+    "@react-stately/tree": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tslib": "^2.3.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
