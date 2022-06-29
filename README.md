@@ -2,6 +2,11 @@
 
 Headless React components with [`@react-aria`](https://react-spectrum.adobe.com/react-aria/index.html) and [`@react-stately`](https://react-spectrum.adobe.com/react-stately/index.html).
 
+## Motivation
+`react-aria` and `react-stately` provide great APIs but they are hard to use between projects to projects and difficult to learn / implement complex components with them. Providing `headless-ui` like APIs would be helpful.
+
+### CAUTION: THIS IS AN UNSTABLE PROJECT FOR THE PERSONAL USE. USE IT AT YOUR OWN RISK.
+
 ## Getting Started
 
 ```
@@ -51,7 +56,7 @@ const AutoComplete = ({
 - [ ] Menu
 - [ ] RadioGroup
 
-...something we need
+...something I need
 
 ## Examples on CodeSandBox
 
