@@ -2741,6 +2741,15 @@
     "@react-stately/selection" "^3.10.1"
     "@react-types/shared" "^3.13.1"
 
+"@react-aria/separator@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@react-aria/separator/-/separator-3.2.1.tgz#fe6fbdf7e768165de136e1cd460f375ff2e178a9"
+  integrity sha512-iBAPH0I5jVqYdEhymqCU5yMyjANL0x8uHrfeE4BohMLhB4Spri+9ZBW1r2lRecMZp++SPRr87jirWv+/UUvo2g==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/utils" "^3.13.1"
+    "@react-types/shared" "^3.13.1"
+
 "@react-aria/ssr@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@react-aria/ssr/-/ssr-3.2.0.tgz#88460384b43204f91c972d5b0de24ee44d6a2984"

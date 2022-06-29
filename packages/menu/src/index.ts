@@ -1,24 +1,17 @@
-import { Menu as MenuRoot } from './Menu'
-import {
-  Popup,
-  PopupItems,
-  PopupItem,
-  PopupSection,
-  PopupSectionHeading,
-  PopupSectionOptions,
-  PopupSeparator
-} from './Popup'
-import { Trigger } from './Trigger'
+import { MenuItem, MenuSection } from './collection'
+import { Menu as MenuRoot, Overlay, Button } from './Menu'
+import { Popup, Separator, ItemLabel, ItemDescription, ItemKeyboard, Items, Heading } from './Popup'
 
 export const Menu = Object.assign(MenuRoot, {
-  Trigger,
+  Button,
+  Overlay,
+  Item: MenuItem,
+  Items,
+  Heading,
+  Section: MenuSection,
   Popup,
-  PopupItems,
-  PopupItem,
-  PopupSection,
-  PopupSectionHeading,
-  PopupSectionOptions,
-  PopupSeparator
+  Separator,
+  ItemLabel,
+  ItemDescription,
+  ItemKeyboard
 })
-
-export * from './types'

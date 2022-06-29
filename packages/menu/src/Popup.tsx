@@ -1,116 +1,93 @@
-import React, { useState, useRef } from 'react'
-import { useMenuContext, MenuPopupSectionProvider, useMenuPopupSectionContext } from './context'
-import {
-  MenuPopupItemProps,
-  MenuPopupItemsProps,
-  MenuPopupProps,
-  MenuPopupSectionHeadingProps,
-  MenuPopupSectionOptionsProps,
-  MenuPopupSectionProps,
-  MenuPopupSeparatorProps
-} from './types'
-import { DismissButton } from '@react-aria/overlays'
-import { FocusScope } from '@react-aria/focus'
+import React, { useRef, ReactNode } from 'react'
+import { Item } from '@headless-react/shared'
+import { TreeProps, useTreeState } from '@react-stately/tree'
+import { useMenu } from '@react-aria/menu'
+import { MenuItemRenderer, MenuSectionRenderer } from './renderer'
 import { mergeProps } from '@react-aria/utils'
-import { useMenuItem, useMenuSection } from '@react-aria/menu'
-import { useFocus } from '@react-aria/interactions'
 import { useSeparator } from '@react-aria/separator'
+import { useMenuContext, useMenuItemContext, useMenuSectionContext } from './context'
 
-export const Popup = (props: MenuPopupProps) => {
-  const { overlayProps, overlayRef, onClose } = useMenuContext()
+export const Popup = (props: TreeProps<Item> & { className?: string }) => {
+  const { onAction, menuProps: ariaMenuProps } = useMenuContext()
+  const state = useTreeState({ ...props, selectionMode: 'none' })
+  const menuRef = useRef<HTMLUListElement | null>(null)
+  const { menuProps } = useMenu({ ...ariaMenuProps, ...props }, state, menuRef)
   return (
-    <FocusScope restoreFocus>
-      <div {...mergeProps(overlayProps, props)} ref={overlayRef} className={props.className}>
-        {props.children}
-        <DismissButton onDismiss={onClose} />
-      </div>
-    </FocusScope>
-  )
-}
-
-export const PopupItems = (props: MenuPopupItemsProps) => {
-  const { menuProps, menuRef } = useMenuContext()
-  return (
-    <ul {...mergeProps(menuProps, props)} ref={menuRef} className={props.className}>
-      {props.children}
+    <ul {...menuProps} ref={menuRef} className={props.className}>
+      {[...state.collection].map((item) =>
+        item.type === 'section' ? (
+          <MenuSectionRenderer key={item.key} state={state} section={item} onAction={onAction} />
+        ) : (
+          <MenuItemRenderer key={item.key} state={state} item={item} onAction={onAction} />
+        )
+      )}
     </ul>
   )
 }
 
-export const PopupSeparator = (props: MenuPopupSeparatorProps) => {
-  const { separatorProps } = useSeparator({
-    elementType: 'li'
-  })
-
-  return <li {...mergeProps(separatorProps, props)} />
-}
-
-export const PopupSection = (props: MenuPopupSectionProps) => {
-  const { section, children } = props
-  const { itemProps, groupProps, headingProps } = useMenuSection({
-    heading: section.rendered,
-    'aria-label': section['aria-label']
-  })
-
+export const Heading = (props: { className?: string; children?: ReactNode }) => {
+  const { headingProps } = useMenuSectionContext()
   return (
-    <MenuPopupSectionProvider
-      value={{
-        itemProps,
-        groupProps,
-        headingProps,
-        section
-      }}
-    >
-      <li {...mergeProps(itemProps, props)} className={props.className}>
-        {typeof children === 'function' ? children?.({ section }) : children}
-      </li>
-    </MenuPopupSectionProvider>
-  )
-}
-
-export const PopupSectionHeading = (props: MenuPopupSectionHeadingProps) => {
-  const { headingProps } = useMenuPopupSectionContext()
-  return (
-    <span {...mergeProps(headingProps, props)} className={props.className}>
+    <span {...headingProps} className={props.className}>
       {props.children}
     </span>
   )
 }
 
-export const PopupSectionOptions = (props: MenuPopupSectionOptionsProps) => {
-  const { groupProps } = useMenuPopupSectionContext()
+Heading.getCollectionNode = function* (props: { className?: string; children?: ReactNode }) {
+  yield null
+}
+
+export const Items = (props: { className?: string; children?: ReactNode }) => {
+  const { groupProps, items, state, onAction } = useMenuSectionContext()
   return (
-    <ul {...mergeProps(groupProps, props)} className={props.className}>
-      {props.children}
+    <ul {...groupProps} className={props.className}>
+      {items.map((item) => (
+        <MenuItemRenderer key={item.key} item={item} state={state} onAction={onAction} />
+      ))}
     </ul>
   )
 }
 
-export const PopupItem = (props: MenuPopupItemProps) => {
-  const { item, onAction } = props
-  const { treeState, onClose } = useMenuContext()
-  const menuItemRef = useRef<HTMLLIElement | null>(null)
-  const { menuItemProps } = useMenuItem(
-    {
-      key: item.key,
-      onClose,
-      onAction
-    },
-    treeState,
-    menuItemRef
-  )
+Items.getCollectionNode = function* () {
+  yield null
+}
 
-  const isDisabled = treeState.disabledKeys.has(item.key)
-  const [isFocused, setFocused] = useState(false)
-  const { focusProps } = useFocus({ onFocusChange: setFocused })
+export const Separator = (props: { className?: string }) => {
+  const { separatorProps } = useSeparator({
+    elementType: 'li'
+  })
 
+  return <li {...separatorProps} className={props.className} />
+}
+
+Separator.getCollectionNode = function* () {
+  yield null
+}
+
+export const ItemLabel = (props: { className?: string; children?: ReactNode }) => {
+  const { labelProps } = useMenuItemContext()
   return (
-    <li
-      {...mergeProps(menuItemProps, focusProps, props)}
-      ref={menuItemRef}
-      className={typeof props.className === 'function' ? props.className?.({ isDisabled, isFocused }) : props.className}
-    >
-      {typeof props.children === 'function' ? props.children?.({ isDisabled, isFocused }) : props.children}
-    </li>
+    <span {...mergeProps(labelProps, props)} className={props.className}>
+      {props.children}
+    </span>
+  )
+}
+
+export const ItemDescription = (props: { className?: string; children?: ReactNode }) => {
+  const { descriptionProps } = useMenuItemContext()
+  return (
+    <span {...mergeProps(descriptionProps, props)} className={props.className}>
+      {props.children}
+    </span>
+  )
+}
+
+export const ItemKeyboard = (props: { className?: string; children?: ReactNode }) => {
+  const { keyboardShortcutProps } = useMenuItemContext()
+  return (
+    <kbd {...mergeProps(keyboardShortcutProps, props)} className={props.className}>
+      {props.children}
+    </kbd>
   )
 }

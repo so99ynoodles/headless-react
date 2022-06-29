@@ -1,4 +1,4 @@
-import { Key } from 'react'
+import { HTMLAttributes, Key } from 'react'
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<T, Exclude<keyof T, Keys>> &
   {
@@ -11,3 +11,11 @@ type RequiredKeys = {
   [key: string | number]: any
 }
 export type Item = RequireAtLeastOne<RequiredKeys, 'key' | 'id'>
+export interface CollectionItemProps<T> extends HTMLAttributes<T> {
+  key: Key
+  textValue: string
+}
+export interface CollectSectionProps<T> extends HTMLAttributes<T> {
+  key: Key
+  title: string
+}
