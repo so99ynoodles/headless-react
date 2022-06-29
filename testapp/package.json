@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@headless-react/combobox": "../packages/combobox/",
+    "@headless-react/combobox": "../packages/combobox",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

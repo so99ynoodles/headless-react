@@ -29,6 +29,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "@headless-react/select": "^0.0.12",
     "@headless-react/shared": "^0.0.12",
     "@react-aria/button": "^3.5.1",
     "@react-aria/combobox": "^3.3.1",

@@ -280,9 +280,10 @@
   dependencies:
     tslib "^2.1.0"
 
-"@headless-react/combobox@../packages/combobox/":
-  version "0.0.2"
+"@headless-react/combobox@../packages/combobox":
+  version "0.0.12"
   dependencies:
+    "@headless-react/shared" "^0.0.12"
     "@react-aria/button" "^3.5.1"
     "@react-aria/combobox" "^3.3.1"
     "@react-aria/focus" "^3.6.1"
@@ -292,6 +293,22 @@
     "@react-aria/utils" "^3.13.1"
     "@react-stately/collections" "^3.4.1"
     "@react-stately/combobox" "^3.1.1"
+
+"@headless-react/shared@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@headless-react/shared/-/shared-0.0.12.tgz#a3d061e73e59f5dccc2234aec93a8f043a2e82b9"
+  integrity sha512-UlVeLzUMVe+z24G08TXdqzYPDig54KwQ2Z17m1uXCDzfINNy2aBD1id6tr36YR9D0edtMk6FEQWuGL/ViWDMZQ==
+  dependencies:
+    "@react-aria/button" "^3.5.1"
+    "@react-aria/focus" "^3.6.1"
+    "@react-aria/interactions" "^3.9.1"
+    "@react-aria/listbox" "^3.5.1"
+    "@react-aria/overlays" "^3.9.1"
+    "@react-aria/select" "^3.7.1"
+    "@react-aria/utils" "^3.13.1"
+    "@react-aria/visually-hidden" "^3.3.1"
+    "@react-stately/collections" "^3.4.1"
+    "@react-stately/select" "^3.2.1"
 
 "@internationalized/date@^3.0.0":
   version "3.0.0"
@@ -489,6 +506,25 @@
     "@react-types/shared" "^3.13.1"
     dom-helpers "^5.2.1"
     react-transition-group "^4.4.2"
+
+"@react-aria/select@^3.7.1":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/@react-aria/select/-/select-3.7.1.tgz#5a14a298f33fad835898752b4dbfb9d251c46348"
+  integrity sha512-g/a3LDkkckZgilsU184y2+By4wLCoRtPdMu51KW9/RXIT55Xvlj4Kgf+ARSikbNaKAfAGvZxLkcv80eJizVZMg==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.4.1"
+    "@react-aria/interactions" "^3.9.1"
+    "@react-aria/label" "^3.3.1"
+    "@react-aria/listbox" "^3.5.1"
+    "@react-aria/menu" "^3.5.1"
+    "@react-aria/selection" "^3.9.1"
+    "@react-aria/utils" "^3.13.1"
+    "@react-aria/visually-hidden" "^3.3.1"
+    "@react-stately/select" "^3.2.1"
+    "@react-types/button" "^3.5.1"
+    "@react-types/select" "^3.6.1"
+    "@react-types/shared" "^3.13.1"
 
 "@react-aria/selection@^3.9.1":
   version "3.9.1"
