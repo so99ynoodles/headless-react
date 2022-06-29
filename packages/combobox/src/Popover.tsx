@@ -33,7 +33,7 @@ export const Popover = (props: ComboBoxPopoverProps) => {
 }
 
 export const PopoverTrigger = (props: ComboBoxPopoverTriggerProps) => {
-  const { buttonProps: triggerProps, buttonRef: triggerRef, state } = useComboBoxContext()
+  const { buttonProps: triggerProps, buttonRef: triggerRef } = useComboBoxContext()
   const { focusProps, isFocusVisible } = useFocusRing()
   const { buttonProps } = useButton(triggerProps, triggerRef)
   return (
@@ -41,7 +41,7 @@ export const PopoverTrigger = (props: ComboBoxPopoverTriggerProps) => {
       {...mergeProps(buttonProps, focusProps, props)}
       ref={triggerRef}
       className={
-        typeof props.className === 'string' ? props.className : props.className?.({ ...state, isFocusVisible })
+        typeof props.className === 'string' ? props.className : props.className?.({ isFocusVisible })
       }
     >
       {props.children}

@@ -4,19 +4,20 @@ import { useListBoxSection } from '@react-aria/listbox'
 import { ComboBoxState } from '@react-stately/combobox'
 import { Node } from '@react-types/shared'
 import { Item } from '@headless-react/shared'
+import { MultiComboBoxState } from './types'
+
+export type SingleState = ComboBoxState<Item>
+export type MultiState = MultiComboBoxState<Item>
+interface ContextType<T> extends ReturnType<typeof useComboBox> {
+  state: T
+  inputRef: MutableRefObject<HTMLInputElement | null>
+  listBoxRef: MutableRefObject<HTMLUListElement | null>
+  popoverRef: MutableRefObject<HTMLDivElement | null>
+  buttonRef: MutableRefObject<HTMLButtonElement | null>
+}
 
 const createComboBoxContext = () => {
-  const ComboBoxContext = createContext<
-    |(ReturnType<typeof useComboBox> & {
-        state: ComboBoxState<Item>
-        inputRef: MutableRefObject<HTMLInputElement | null>
-        listBoxRef: MutableRefObject<HTMLUListElement | null>
-        popoverRef: MutableRefObject<HTMLDivElement | null>
-        buttonRef: MutableRefObject<HTMLButtonElement | null>
-      })
-      | undefined
-      >(undefined)
-
+  const ComboBoxContext = createContext<ContextType<SingleState | MultiState> | undefined>(undefined)
   const useComboBoxContext = () => {
     const context = useContext(ComboBoxContext)
     if (!context) {

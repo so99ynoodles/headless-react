@@ -1,13 +1,13 @@
 import React, { useRef } from 'react'
 import { Item as CollectionItem, Section } from '@react-stately/collections'
 import { useFilter } from '@react-aria/i18n'
-import { useComboBox } from '@react-aria/combobox'
-import { useComboBoxState } from '@react-stately/combobox'
 import { Item } from '@headless-react/shared'
 import { ComboBoxProvider } from './context'
-import { ComboBoxRootProps } from './types'
+import { MultiComboBoxRootProps } from './types'
+import { useMultiComboBoxState } from './hooks/useMultiComboBoxState'
+import { useMultiComboBox } from './hooks/useMultiComboBox'
 
-export const ComboBox = (props: ComboBoxRootProps) => {
+export const MultiComboBox = (props: MultiComboBoxRootProps) => {
   const ariaProps = {
     ...props,
     label: props.label || 'x',
@@ -20,13 +20,13 @@ export const ComboBox = (props: ComboBoxRootProps) => {
       )
   }
   const { contains } = useFilter({ sensitivity: 'base' })
-  const state = useComboBoxState({ ...ariaProps, defaultFilter: contains })
+  const state = useMultiComboBoxState({ ...ariaProps, defaultFilter: contains })
   const inputRef = useRef<HTMLInputElement | null>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const listBoxRef = useRef<HTMLUListElement | null>(null)
   const popoverRef = useRef<HTMLDivElement | null>(null)
 
-  const comboBoxRootProps = useComboBox(
+  const comboBoxProps = useMultiComboBox(
     {
       ...ariaProps,
       inputRef,
@@ -40,7 +40,7 @@ export const ComboBox = (props: ComboBoxRootProps) => {
   return (
     <ComboBoxProvider
       value={{
-        ...comboBoxRootProps,
+        ...comboBoxProps,
         state,
         inputRef,
         buttonRef,

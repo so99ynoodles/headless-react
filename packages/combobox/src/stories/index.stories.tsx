@@ -1,7 +1,8 @@
 import classcat from 'classcat'
 import React from 'react'
 import { FaCheck, FaChevronDown, FaSearch } from 'react-icons/fa'
-import { ComboBox, ComboBoxProps } from '../index'
+import { ComboBox, ComboBoxRootProps, MultiComboBox } from '../index'
+import { IoMdClose } from 'react-icons/io'
 
 export default {
   title: 'Example/ComboBox',
@@ -95,7 +96,7 @@ const items = [
   }
 ]
 
-const AutoComplete = (props: ComboBoxProps) => {
+const AutoComplete = (props: ComboBoxRootProps) => {
   return (
     <ComboBox {...props}>
       <ComboBox.Label className="block text-sm font-medium mb-1 text-gray-700">{props.label}</ComboBox.Label>
@@ -216,36 +217,131 @@ const AutoComplete = (props: ComboBoxProps) => {
   )
 }
 
-export const Tailwind = () => <AutoComplete defaultItems={items} label="Assigned to" />
+export const SingleComboBox = () => <AutoComplete defaultItems={items} label="Assigned to" />
 
-// interface StarWarsCharacter {
-//   name: string;
-// }
-// export const AsyncLoading = () => {
-//   const list = useAsyncList<StarWarsCharacter>({
-//     async load ({ signal, cursor, filterText }) {
-//       if (cursor) {
-//         cursor = cursor.replace(/^http:\/\//i, 'https://')
-//       }
-
-//       // If no cursor is available, then we're loading the first page,
-//       // filtering the results returned via a query string that
-//       // mirrors the input text.
-//       // Otherwise, the cursor is the next URL to load,
-//       // as returned from the previous page.
-//       const res = await fetch(
-//         cursor || `https://swapi.dev/api/people/?search=${filterText}`,
-//         { signal }
-//       )
-//       const json = await res.json()
-
-//       return {
-//         items: json.results,
-//         cursor: json.next
-//       }
-//     }
-//   })
-//   return (
-//     <AutoComplete items={list.items.map(item => ({ ...item, key: item.name }))} inputValue={list.filterText} onInputChange={list.setFilterText} label="Star Wars Character Search" />
-//   )
-// }
+export const MultipleComboBox = () => (
+  <MultiComboBox defaultItems={items}>
+      <MultiComboBox.Label className="block text-sm font-medium mb-1 text-gray-700">Multiple</MultiComboBox.Label>
+      <MultiComboBox.InputGroup
+        className={({ isFocused }) => `
+        ${isFocused ? 'ring-indigo-500 border-indigo-500 ring-1' : 'border-gray-300'}
+        relative w-full rounded-md shadow-sm text-left cursor-default outline-none flex items-center border gap-1 px-10
+      `}
+      >
+        {({ selectedItems }) => (
+          <>
+            <MultiComboBox.InputGroupItem className="absolute left-2 top-1/2 -translate-y-1/2">
+              <FaSearch className="h-5 w-5 text-gray-300" aria-hidden="true" />
+            </MultiComboBox.InputGroupItem>
+            <MultiComboBox.InputGroupItem className="flex items-center gap-1 grow flex-wrap py-2">
+              {selectedItems.length ? selectedItems.map(item => (
+                <MultiComboBox.InputGroupItem className="relative flex items-center gap-1 text-xs pl-1 pr-4 py-1 box-border block rounded bg-indigo-200" key={item.key}>
+                  <img src={item.value.avatar} alt="" className="flex-shrink-0 h-4 w-4 rounded-full" />
+                  <span className="block truncate">{item.value.name}</span>
+                  <MultiComboBox.InputGroupItemClearButton item={item} className="absolute top-1/2 -translate-y-1/2 right-1 flex justify-center items-center">
+                    <IoMdClose className="h-3 w-3 text-gray-400" aria-hidden="true" />
+                  </MultiComboBox.InputGroupItemClearButton>
+                </MultiComboBox.InputGroupItem>
+              )) : null}
+              <MultiComboBox.Input placeholder="Search..." className="relative grow rounded-md outline-none" />
+            </MultiComboBox.InputGroupItem>
+            <MultiComboBox.PopoverTrigger className="absolute ml-3 inset-y-0 right-0 flex items-center pr-2">
+              <FaChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </MultiComboBox.PopoverTrigger>
+          </>
+        )}
+      </MultiComboBox.InputGroup>
+      <MultiComboBox.Popover>
+        <MultiComboBox.Options className="z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+          {({ options }) =>
+            options.map((option) =>
+              option.type === 'section' ? (
+                <MultiComboBox.Section key={option.key} section={option}>
+                  {({ section }) => (
+                    <>
+                      {section.rendered && <MultiComboBox.SectionHeading className='text-xs font-bold uppercase text-gray-500 mx-3'>{section.rendered}</MultiComboBox.SectionHeading>}
+                      <MultiComboBox.SectionOptions>
+                        {[...section.childNodes].map((option) => {
+                          return ((
+                            <MultiComboBox.Option
+                              className={({ isDisabled, isFocused }) =>
+                                classcat({
+                                  'cursor-default select-none relative py-2 pl-3 pr-9 rounded-none': true,
+                                  'text-gray-500': isDisabled,
+                                  'text-white bg-indigo-600': isFocused
+                                })
+                              }
+                              key={option.key}
+                              option={option}
+                            >
+                              {({ isSelected, isFocused }) => (
+                                <>
+                                  <div className="flex items-center">
+                                    <img
+                                      src={option.value?.avatar}
+                                      alt=""
+                                      className="flex-shrink-0 h-6 w-6 rounded-full"
+                                    />
+                                    <span
+                                      className={`${isSelected ? 'font-semibold' : 'font-normal'} ml-3 block truncate`}
+                                    >
+                                      {option.value?.name}
+                                    </span>
+                                  </div>
+                                  {isSelected ? (
+                                    <span
+                                      className={`${
+                                        isFocused ? 'text-white' : 'text-indigo-600'
+                                      } absolute inset-y-0 right-0 flex items-center pr-4`}
+                                    >
+                                      <FaCheck className="h-5 w-5" aria-hidden="true" />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </MultiComboBox.Option>
+                          ))
+                        })}
+                      </MultiComboBox.SectionOptions>
+                    </>
+                  )}
+                </MultiComboBox.Section>
+              ) : (
+                <MultiComboBox.Option
+                  className={({ isDisabled, isFocused }) =>
+                    classcat({
+                      'cursor-default select-none relative py-2 pl-3 pr-9 rounded-none': true,
+                      'text-gray-500': isDisabled,
+                      'text-white bg-indigo-600': isFocused
+                    })
+                  }
+                  key={option.key}
+                  option={option}
+                >
+                  {({ isSelected, isFocused }) => (
+                    <>
+                      <div className="flex items-center">
+                        {option.value.avatar && <img src={option.value.avatar} alt="" className="flex-shrink-0 h-6 w-6 rounded-full" />}
+                        <span className={`${isSelected ? 'font-semibold' : 'font-normal'} ml-3 block truncate`}>
+                          {option.value.name}
+                        </span>
+                      </div>
+                      {isSelected ? (
+                        <span
+                          className={`${
+                            isFocused ? 'text-white' : 'text-indigo-600'
+                          } absolute inset-y-0 right-0 flex items-center pr-4`}
+                        >
+                          <FaCheck className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </MultiComboBox.Option>
+              )
+            )
+          }
+        </MultiComboBox.Options>
+      </MultiComboBox.Popover>
+    </MultiComboBox>
+)

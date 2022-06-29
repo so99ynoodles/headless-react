@@ -1,9 +1,24 @@
-import { HTMLAttributes, ReactNode } from 'react'
-import { ComboBoxState } from '@react-stately/combobox'
+import { HTMLAttributes, Key, ReactNode } from 'react'
+import { ComboBoxState, ComboBoxStateProps } from '@react-stately/combobox'
 import { AriaComboBoxProps } from '@react-types/combobox'
-import { Node } from '@react-types/shared'
+import { Node, SingleSelection, MultipleSelection } from '@react-types/shared'
 import { Item } from '@headless-react/shared'
-export interface ComboBoxProps extends Omit<AriaComboBoxProps<Item>, 'children'> {
+import { AriaComboBoxOptions } from '@react-aria/combobox'
+import { SelectState } from '@react-stately/select'
+import { MultiSelectState } from '@headless-react/select'
+import { AriaButtonProps } from '@react-types/button'
+import { MultiState, SingleState } from './context'
+
+export interface AriaMultiComboBoxOptions<T> extends Omit<AriaComboBoxOptions<T>, keyof SingleSelection>, MultipleSelection {}
+export interface MultiComboBoxStateProps<T> extends Omit<ComboBoxStateProps<T>, keyof SingleSelection>, Omit<MultipleSelection, 'selectedKeys'> {
+  selectedKeys?: Iterable<Key>
+}
+export interface MultiComboBoxState<T> extends Omit<ComboBoxState<T>, keyof SelectState<T>>, MultiSelectState<T> {}
+export interface MultiComboBoxRootProps extends Omit<MultiComboBoxStateProps<Item>, 'children'> {
+  children?: ReactNode
+  label?: string
+}
+export interface ComboBoxRootProps extends Omit<AriaComboBoxProps<Item>, 'children'> {
   children?: ReactNode
   label?: string
 }
@@ -27,11 +42,11 @@ export interface ComboBoxSectionProps extends Omit<HTMLAttributes<HTMLLIElement>
 }
 export interface ComboBoxSectionOptionsProps extends HTMLAttributes<HTMLUListElement> {}
 export interface ComboBoxSectionHeadingProps extends HTMLAttributes<HTMLSpanElement> {}
-export interface ComboBoxInputGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'children'> {
-  className?: string | ((props: { isFocused: boolean; isOpen: boolean; selectedItem: Node<Item> }) => string)
+export interface ComboBoxInputGroupProps<T = SingleState | MultiState> extends Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'children'> {
+  className?: string | ((props: T extends SingleState ? { isFocused: boolean; isOpen: boolean; selectedItem: Node<Item> } : { isFocused: boolean; isOpen: boolean; selectedItems: Node<Item>[] }) => string)
   children:
     | ReactNode
-    | ((props: { isFocused: boolean; isOpen: boolean; selectedItem: Node<Item> }) => ReactNode)
+    | ((props: T extends SingleState ? { isFocused: boolean; isOpen: boolean; selectedItem: Node<Item> } : { isFocused: boolean; isOpen: boolean; selectedItems: Node<Item>[] }) => ReactNode)
 }
 export interface ComboBoxInputProps extends Omit<HTMLAttributes<HTMLInputElement>, 'className'> {
   className?: string | ((props: { isFocused: boolean }) => string)
@@ -40,5 +55,11 @@ export interface ComboBoxPopoverTriggerProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'placeholder' | 'children' | 'className'> {
   placeholder?: ReactNode
   children: ReactNode
-  className?: string | ((props: ComboBoxState<Item> & { isFocusVisible: boolean }) => string)
+  className?: string | ((props: { isFocusVisible: boolean }) => string)
+}
+
+export interface MultiComboBoxInputGroupItemProps extends HTMLAttributes<HTMLSpanElement> {}
+export interface MultiComboBoxInputGroupItemClearButtonProps extends AriaButtonProps<'span'> {
+  className?: string;
+  item: Node<Item>
 }
