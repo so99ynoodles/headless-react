@@ -24,7 +24,7 @@ export interface MultiSelectListState<T> extends ListState<T> {
 export function useMultiSelectListState<T extends object>(props: MultiSelectListProps<T>): MultiSelectListState<T> {
   const [selectedKeys, setSelectedKeys] = useControlledState<Selection>(
     props.selectedKeys as Selection,
-    props.defaultSelectedKeys = new Set(),
+    (props.defaultSelectedKeys = new Set()),
     props.onSelectionChange!
   )
   const { collection, disabledKeys, selectionManager } = useListState({
@@ -40,7 +40,8 @@ export function useMultiSelectListState<T extends object>(props: MultiSelectList
     }
   })
 
-  const selectedItems = selectedKeys === 'all' ? [...collection] : [...selectedKeys].map(key => collection.getItem(key))
+  const selectedItems =
+    selectedKeys === 'all' ? [...collection] : [...selectedKeys].map((key) => collection.getItem(key) || key)
   return {
     collection,
     disabledKeys,
