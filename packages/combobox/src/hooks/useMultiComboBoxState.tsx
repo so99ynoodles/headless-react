@@ -72,6 +72,8 @@ export function useMultiComboBoxState<T extends object>(props: MultiComboBoxStat
       if (displayAllItems && !triggerState.isOpen && props.items === undefined) {
         // Show all items if menu is manually opened. Only care about this if items are undefined
         setShowAllItems(true)
+      } else {
+        setShowAllItems(false)
       }
 
       menuOpenTrigger.current = trigger!
